@@ -135,15 +135,21 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Hero card: plays once on load, as if the contract is being read. Each row's
-   delay is set inline (ContractCard.tsx). CSS animation, not JS — it runs
-   while the page is still loading fonts, so it has to stay off the main thread.
+   Contract card: fills in once it scrolls into view, as if the contract is
+   being read. Each row's delay is set inline (ContractCard.tsx).
    --------------------------------------------------------------------------- */
-.extract-row {
+.reading-card .extract-row,
+.reading-card .extract-cite {
+  opacity: 0;
+}
+
+.reading-card[data-visible] .extract-row {
+  opacity: 1;
   animation: extract-row 280ms var(--ease-out) both;
 }
 
-.extract-cite {
+.reading-card[data-visible] .extract-cite {
+  opacity: 1;
   animation: extract-fade 200ms var(--ease-out) both;
 }
 
@@ -275,11 +281,67 @@
   transform: none;
 }
 
+/* ---------------------------------------------------------------------------
+   Hero: documents spiral into the mango (MangoSwirl.tsx). Once, on load.
+   Rotation and radius interpolate together, which traces the spiral. The
+   mango settles in as the last documents arrive; its fold lands just after.
+   --------------------------------------------------------------------------- */
+.swirl-doc {
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 200px 200px;
+  animation: swirl-in 1100ms var(--ease-in-out) both;
+}
+
+@keyframes swirl-in {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--a)) translateX(var(--r)) rotate(var(--tilt)) scale(1);
+  }
+  12% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--spin)) translateX(0px) rotate(calc(var(--tilt) + 180deg)) scale(0.25);
+  }
+}
+
+.swirl-mango {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: swirl-mango 450ms var(--ease-out) 1000ms both;
+}
+
+@keyframes swirl-mango {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.swirl-fold {
+  animation: extract-fade 250ms var(--ease-out) 1300ms both;
+}
+
 /* Reduced motion: keep the fades that carry meaning, drop the movement. */
 @media (prefers-reduced-motion: reduce) {
-  .extract-row,
-  .tour-swap {
+  .reading-card[data-visible] .extract-row,
+  .tour-swap,
+  .swirl-mango {
     animation-name: extract-fade;
+  }
+
+  /* The mango simply fades in; no documents fly. */
+  .swirl-doc {
+    display: none;
+  }
+
+  .swirl-mango {
+    animation-delay: 0ms;
   }
 
   .strike-overlay {

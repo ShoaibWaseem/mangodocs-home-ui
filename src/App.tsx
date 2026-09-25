@@ -1,6 +1,7 @@
 import { Header } from '@/components/Header'
 import { Hero } from '@/sections/Hero'
 import { Problem } from '@/sections/Problem'
+import { Reading } from '@/sections/Reading'
 import { HowItWorks } from '@/sections/HowItWorks'
 import { Features } from '@/sections/Features'
 import { Honesty } from '@/sections/Honesty'
@@ -16,6 +17,7 @@ export function App() {
       <main>
         <Hero />
         <Problem />
+        <Reading />
         <HowItWorks />
         <Features />
         <Honesty />

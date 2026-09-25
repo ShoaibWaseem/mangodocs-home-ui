@@ -1,4 +1,5 @@
 import { FileText, Quote } from 'lucide-react'
+import { useInViewOnce } from '@/lib/useInViewOnce'
 
 // Illustrative product mock for the hero. Deliberately shows a "Not stated"
 // term — the never-guess behaviour is the pitch, so the picture should prove it.
@@ -12,7 +13,7 @@ const TERMS: { label: string; value: string; cite?: string; missing?: boolean }[
 
 // Row timings for the one-time "reading" sequence (globals.css .extract-row).
 // The missing term lands last, after an extra beat — it's the point.
-const FIRST_ROW_MS = 300
+const FIRST_ROW_MS = 150
 const ROW_STAGGER_MS = 60
 const MISSING_BEAT_MS = 150
 const CITE_AFTER_MS = 120
@@ -22,8 +23,10 @@ function rowDelay(i: number, missing?: boolean) {
 }
 
 export function ContractCard() {
+  const { ref, inView } = useInViewOnce<HTMLDivElement>()
+
   return (
-    <div className="relative">
+    <div ref={ref} data-visible={inView || undefined} className="reading-card relative">
       <div
         aria-hidden="true"
         className="absolute -inset-6 -z-10 rounded-[28px] bg-gradient-to-br from-mango-100 via-mango-50 to-transparent opacity-80 blur-2xl"
