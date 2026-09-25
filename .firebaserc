@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "mango-docs-1e921"
+  },
+  "targets": {
+    "mango-docs-1e921": {
+      "hosting": {
+        "home": ["mangodocs-home"]
+      }
+    }
+  }
+}

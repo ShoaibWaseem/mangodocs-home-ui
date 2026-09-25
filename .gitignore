@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env
+.env
+.env.production
+.env.*.local
+
+# Leftover git worktrees from earlier sessions — real local checkouts,
+# never something the main repo should track as embedded repos.
+.claude/worktrees
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.local
+
+# Firebase deploy cache
+.firebase/
