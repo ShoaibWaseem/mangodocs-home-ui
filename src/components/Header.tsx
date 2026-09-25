@@ -55,35 +55,39 @@ export function Header() {
           className="-mr-2 inline-flex h-10 w-10 items-center justify-center rounded-md text-ink md:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      {open && (
-        <nav className="container max-w-6xl pb-6 md:hidden" aria-label="Mobile">
-          <ul className="flex flex-col gap-1">
-            {NAV.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-md px-2 py-2.5 text-base font-medium text-ink-secondary hover:bg-surface-sunken"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-4 flex flex-col gap-2">
-            <ButtonLink href={DEMO_URL}>Book a demo</ButtonLink>
-            <ButtonLink href={APP_URL} variant="secondary">
-              Sign in
-            </ButtonLink>
-          </div>
-        </nav>
-      )}
+      <nav
+        data-open={open || undefined}
+        className="mobile-menu container max-w-6xl pb-6"
+        aria-label="Mobile"
+        id="mobile-menu"
+      >
+        <ul className="flex flex-col gap-1">
+          {NAV.map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="block rounded-md px-2 py-2.5 text-base font-medium text-ink-secondary hover:bg-surface-sunken"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-4 flex flex-col gap-2">
+          <ButtonLink href={DEMO_URL}>Book a demo</ButtonLink>
+          <ButtonLink href={APP_URL} variant="secondary">
+            Sign in
+          </ButtonLink>
+        </div>
+      </nav>
     </header>
   )
 }

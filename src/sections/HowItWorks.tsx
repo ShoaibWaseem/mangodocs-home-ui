@@ -1,5 +1,6 @@
 import { FolderSync, ScanText, ShieldCheck } from 'lucide-react'
 import { SectionHeading } from '@/components/Section'
+import { SourcesFlow } from '@/components/SourcesFlow'
 
 const STEPS = [
   {
@@ -23,7 +24,14 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" className="scroll-mt-16 py-20 sm:py-28">
       <div className="container max-w-6xl">
-        <SectionHeading eyebrow="How it works" title="Three steps. No re-platforming." />
+        <SectionHeading
+          eyebrow="How it works"
+          title="Three steps. No re-platforming."
+          lede="Contracts scattered across folders and drives become one searchable source — without moving a single file."
+        />
+        <div className="mt-12">
+          <SourcesFlow />
+        </div>
         <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
           {STEPS.map((s, i) => (
             <li key={s.title} className="relative">

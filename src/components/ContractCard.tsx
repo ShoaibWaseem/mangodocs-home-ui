@@ -10,6 +10,17 @@ const TERMS: { label: string; value: string; cite?: string; missing?: boolean }[
   { label: 'Governing law', value: 'Not stated in document', missing: true },
 ]
 
+// Row timings for the one-time "reading" sequence (globals.css .extract-row).
+// The missing term lands last, after an extra beat — it's the point.
+const FIRST_ROW_MS = 300
+const ROW_STAGGER_MS = 60
+const MISSING_BEAT_MS = 150
+const CITE_AFTER_MS = 120
+
+function rowDelay(i: number, missing?: boolean) {
+  return FIRST_ROW_MS + i * ROW_STAGGER_MS + (missing ? MISSING_BEAT_MS : 0)
+}
+
 export function ContractCard() {
   return (
     <div className="relative">
@@ -32,10 +43,11 @@ export function ContractCard() {
         </div>
 
         <dl className="divide-y divide-border">
-          {TERMS.map((t) => (
+          {TERMS.map((t, i) => (
             <div
               key={t.label}
-              className="grid grid-cols-[7.5rem_1fr] items-center gap-3 px-5 py-3 sm:grid-cols-[9rem_1fr]"
+              style={{ animationDelay: `${rowDelay(i, t.missing)}ms` }}
+              className="extract-row grid grid-cols-[7.5rem_1fr] items-center gap-3 px-5 py-3 sm:grid-cols-[9rem_1fr]"
             >
               <dt className="text-xs font-medium text-ink-muted">{t.label}</dt>
               <dd className="flex min-w-0 items-center justify-between gap-2">
@@ -47,7 +59,10 @@ export function ContractCard() {
                   <span className="truncate text-sm font-medium text-ink">{t.value}</span>
                 )}
                 {t.cite && (
-                  <span className="shrink-0 rounded bg-surface-sunken px-1.5 py-0.5 font-mono text-[11px] text-ink-secondary">
+                  <span
+                    style={{ animationDelay: `${rowDelay(i) + CITE_AFTER_MS}ms` }}
+                    className="extract-cite shrink-0 rounded bg-surface-sunken px-1.5 py-0.5 font-mono text-[11px] text-ink-secondary"
+                  >
                     {t.cite}
                   </span>
                 )}

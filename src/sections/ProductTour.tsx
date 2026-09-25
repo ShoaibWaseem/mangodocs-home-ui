@@ -54,6 +54,8 @@ const TOUR = [
 
 export function ProductTour() {
   const [active, setActive] = useState(TOUR[0].id)
+  // The first panel is just there on load; only a tab change animates.
+  const [changed, setChanged] = useState(false)
   const current = TOUR.find((t) => t.id === active) ?? TOUR[0]
 
   return (
@@ -79,7 +81,11 @@ export function ProductTour() {
                 id={`tab-${t.id}`}
                 aria-selected={t.id === active}
                 aria-controls="tour-panel"
-                onClick={() => setActive(t.id)}
+                onClick={() => {
+                  if (t.id === active) return
+                  setActive(t.id)
+                  setChanged(true)
+                }}
                 className={`shrink-0 whitespace-nowrap rounded-md px-4 py-2.5 text-left text-sm font-medium transition-colors ${
                   t.id === active
                     ? 'bg-neutral-900 text-neutral-50'
@@ -97,9 +103,11 @@ export function ProductTour() {
             aria-labelledby={`tab-${current.id}`}
             className="flex min-h-[16rem] flex-col justify-end rounded-xl border border-border bg-gradient-to-br from-mango-50 via-surface to-surface p-8 sm:p-12"
           >
-            <p className="font-mono text-xs uppercase tracking-[0.08em] text-mango-800">{current.label}</p>
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{current.title}</h3>
-            <p className="mt-3 max-w-xl text-lg leading-relaxed text-ink-secondary">{current.body}</p>
+            <div key={current.id} className={changed ? 'tour-swap' : undefined}>
+              <p className="font-mono text-xs uppercase tracking-[0.08em] text-mango-800">{current.label}</p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{current.title}</h3>
+              <p className="mt-3 max-w-xl text-lg leading-relaxed text-ink-secondary">{current.body}</p>
+            </div>
           </div>
         </div>
       </div>
