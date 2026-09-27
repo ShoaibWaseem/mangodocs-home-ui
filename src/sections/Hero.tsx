@@ -1,6 +1,6 @@
 import { ArrowRight, Check } from 'lucide-react'
 import { ButtonLink } from '@/components/Button'
-import { MangoSwirl } from '@/components/MangoSwirl'
+import { MangoAtom } from '@/components/MangoAtom'
 import { DEMO_URL } from '@/config'
 
 const POINTS = ['Google Drive & SharePoint', 'Nothing moved or migrated', 'Every fact cited']
@@ -40,7 +40,7 @@ export function Hero() {
             ))}
           </ul>
         </div>
-        <MangoSwirl />
+        <MangoAtom />
       </div>
     </section>
   )
