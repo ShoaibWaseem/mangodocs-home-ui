@@ -1,6 +1,9 @@
 import { useRef, useState, type KeyboardEvent } from 'react'
+import { Check } from 'lucide-react'
 import { SectionHeading } from '@/components/Section'
-import { TourScreen } from '@/components/tour/Screens'
+
+// Describes what each area does, deliberately without showing the app's
+// screens. Every capability must be literally true of mangodocs-ui.
 
 const TOUR = [
   {
@@ -8,48 +11,93 @@ const TOUR = [
     label: 'Home',
     title: 'The whole portfolio at a glance',
     body: 'What’s active, what’s expiring, what needs attention — real activity from your real contracts.',
+    capabilities: [
+      'Active, expiring and high-risk contracts at a glance',
+      'An obligations recap across the whole portfolio',
+      'Risk flags that need someone’s attention',
+      'Recent activity from your own contracts',
+    ],
   },
   {
     id: 'repository',
     label: 'Repository',
     title: 'Every contract, your way',
     body: 'Table, board or Gantt timeline, filterable and sortable however your team works, with full CSV export.',
+    capabilities: [
+      'Table, board or Gantt timeline views',
+      'Filter and sort to match how your team works',
+      'Full CSV export of everything extracted',
+    ],
   },
   {
     id: 'contract',
     label: 'Contract detail',
     title: 'One page with everything',
     body: 'Key terms, parties and signatories, obligations, risk flags, related documents — and a link straight back to the source file.',
+    capabilities: [
+      'Key terms, each linked to its clause and page',
+      'Parties, signatories and obligations',
+      'Risk flags, with the fact behind each one',
+      'Corrections recorded in the audit trail',
+    ],
   },
   {
     id: 'renewals',
     label: 'Renewals',
     title: 'Start renewal conversations first',
     body: 'A 400-day runway before every expiry, so the conversation starts on your timeline, not the counterparty’s.',
+    capabilities: [
+      'Every contract inside a 400-day renewal horizon',
+      'Auto-renew status and notice deadlines, taken from the contract',
+      'Dates come from the contract itself, never estimated',
+    ],
   },
   {
     id: 'search',
     label: 'Search & Ask',
     title: 'One box for keywords and questions',
     body: 'Search for a clause or ask a full question — answers come with citations you can check.',
+    capabilities: [
+      'Keyword search for any clause or phrase',
+      'Plain-English questions, answered with citations',
+      'Each citation opens the paragraph it came from',
+      'Past questions kept, so answers can be revisited',
+    ],
   },
   {
     id: 'reporting',
     label: 'Reporting',
     title: 'Numbers computed from what was found',
     body: 'Risk distribution, missing key terms by contract type, retention status, obligation completion — never a sample dashboard.',
+    capabilities: [
+      'Risk level by contract type',
+      'Key-terms coverage: what your contracts don’t say',
+      'Obligations completed on time',
+      'Retention status and legal holds',
+    ],
   },
   {
     id: 'counterparties',
     label: 'Counterparties',
     title: 'Everyone you do business with',
     body: 'Rolled up across every contract that names them: how many, how much, what’s open, what’s at risk.',
+    capabilities: [
+      'Every party rolled up across the contracts that name them',
+      'Open obligations and risk per counterparty',
+      'Duplicate counterparties merged into one',
+    ],
   },
   {
     id: 'admin',
     label: 'Admin',
     title: 'Control in one place',
     body: 'Users and roles, retention policy per contract type, audit log, risk thresholds and every connected source.',
+    capabilities: [
+      'Users, roles and access rules',
+      'Retention policy per contract type',
+      'A full audit log of who did what, and when',
+      'Risk thresholds, notifications and connected sources',
+    ],
   },
 ]
 
@@ -132,27 +180,29 @@ export function ProductTour() {
                 )
               })}
             </div>
-
-            <div key={current.id} className={`mt-6 lg:mt-8 ${changed ? 'tour-swap' : ''}`} aria-live="polite">
-              <h3 className="text-xl font-semibold tracking-tight text-ink">{current.title}</h3>
-              <p className="mt-2 leading-relaxed text-ink-secondary">{current.body}</p>
-            </div>
           </div>
 
-          <div id="tour-panel" role="tabpanel" aria-labelledby={`tab-${current.id}`} className="relative min-w-0">
-            <div
-              aria-hidden="true"
-              className="absolute -inset-x-6 -inset-y-8 -z-10 rounded-[32px] bg-gradient-to-br from-mango-100/80 via-mango-50/60 to-transparent blur-2xl"
-            />
-            <div
-              key={current.id}
-              className={changed ? 'tour-screen-swap' : undefined}
-              role="img"
-              aria-label={`MangoDocs ${current.label} screen, with sample data`}
-            >
-              <TourScreen id={current.id} />
+          <div
+            id="tour-panel"
+            role="tabpanel"
+            aria-labelledby={`tab-${current.id}`}
+            className="min-w-0 rounded-xl border border-border bg-gradient-to-br from-mango-50 via-surface to-surface p-7 sm:p-10"
+          >
+            <div key={current.id} className={changed ? 'tour-swap' : undefined}>
+              <p className="font-mono text-xs uppercase tracking-[0.08em] text-mango-800">{current.label}</p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{current.title}</h3>
+              <p className="mt-3 max-w-xl text-lg leading-relaxed text-ink-secondary">{current.body}</p>
+              <ul className="mt-8 grid gap-x-8 gap-y-4 border-t border-border pt-8 sm:grid-cols-2">
+                {current.capabilities.map((c) => (
+                  <li key={c} className="flex gap-3 leading-snug text-ink">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-mango-100 text-mango-800">
+                      <Check className="h-3 w-3" strokeWidth={3} />
+                    </span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p className="mt-3 text-right text-xs text-ink-muted">Shown with sample data.</p>
           </div>
         </div>
       </div>

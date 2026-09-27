@@ -205,20 +205,6 @@
   }
 }
 
-/* The screen itself crossfades through a light blur, so the eye reads one
-   screen changing rather than two overlapping. */
-.tour-screen-swap {
-  animation: tour-screen-swap 240ms var(--ease-out) both;
-}
-
-@keyframes tour-screen-swap {
-  from {
-    opacity: 0;
-    filter: blur(3px);
-    transform: scale(0.99);
-  }
-}
-
 /* ---------------------------------------------------------------------------
    FAQ: native <details>, so it works with no JS and in find-in-page. Where
    the browser supports animating to `auto`, the answer opens smoothly;
@@ -370,7 +356,6 @@
 @media (prefers-reduced-motion: reduce) {
   .reading-card[data-visible] .extract-row,
   .tour-swap,
-  .tour-screen-swap,
   .swirl-mango {
     animation-name: extract-fade;
   }
