@@ -180,7 +180,10 @@ export function InterestForm() {
 
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs leading-relaxed text-ink-muted sm:max-w-[16rem]">
-                  We’ll only use these details to contact you about MangoDocs.
+                  We’ll only use these details to contact you about MangoDocs.{' '}
+                  <a href="/privacy" className="underline underline-offset-2 hover:text-ink">
+                    Privacy notice
+                  </a>
                 </p>
                 <button
                   type="submit"

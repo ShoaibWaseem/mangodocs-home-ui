@@ -205,6 +205,45 @@
   }
 }
 
+/* The screen itself crossfades through a light blur, so the eye reads one
+   screen changing rather than two overlapping. */
+.tour-screen-swap {
+  animation: tour-screen-swap 240ms var(--ease-out) both;
+}
+
+@keyframes tour-screen-swap {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: scale(0.99);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   FAQ: native <details>, so it works with no JS and in find-in-page. Where
+   the browser supports animating to `auto`, the answer opens smoothly;
+   elsewhere it simply appears. Closing is quicker than opening.
+   --------------------------------------------------------------------------- */
+.faq {
+  interpolate-size: allow-keywords;
+}
+
+.faq::details-content {
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    block-size 180ms var(--ease-out),
+    opacity 180ms var(--ease-out),
+    content-visibility 180ms allow-discrete;
+}
+
+.faq[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+  transition-duration: 260ms;
+}
+
 /* ---------------------------------------------------------------------------
    Mobile menu: drops from the header on open, leaves faster than it came.
    display is transitioned discretely so the exit can play; browsers without
@@ -331,6 +370,7 @@
 @media (prefers-reduced-motion: reduce) {
   .reading-card[data-visible] .extract-row,
   .tour-swap,
+  .tour-screen-swap,
   .swirl-mango {
     animation-name: extract-fade;
   }
@@ -357,6 +397,14 @@
   .mobile-menu,
   .mobile-menu[data-open] {
     transform: none;
+  }
+
+  .faq::details-content {
+    transition-property: opacity, content-visibility;
+  }
+
+  .faq[open]::details-content {
+    block-size: auto;
   }
 
   /* Static, finished diagram — no drawing, no trickle (SourcesFlow.tsx

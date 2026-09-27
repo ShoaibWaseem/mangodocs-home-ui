@@ -63,12 +63,15 @@ export function Features() {
         />
         <div className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map((f) => (
-            <div key={f.title}>
-              <span className="flex h-10 w-10 items-center justify-center rounded-md bg-mango-50 text-mango-800 ring-1 ring-inset ring-mango-100">
+            // Phones: icon beside the text, so eight features don't become one very long column.
+            <div key={f.title} className="flex gap-4 sm:block">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-mango-50 text-mango-800 ring-1 ring-inset ring-mango-100">
                 <f.icon className="h-5 w-5" />
               </span>
-              <h3 className="mt-4 font-semibold text-ink">{f.title}</h3>
-              <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-secondary">{f.body}</p>
+              <div>
+                <h3 className="mt-2 font-semibold text-ink sm:mt-4">{f.title}</h3>
+                <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-secondary">{f.body}</p>
+              </div>
             </div>
           ))}
         </div>

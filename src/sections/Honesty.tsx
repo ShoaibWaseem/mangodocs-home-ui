@@ -41,7 +41,7 @@ export function Honesty() {
           data-visible={inView || undefined}
           className="overflow-hidden rounded-lg border border-neutral-800"
         >
-          <div className="grid grid-cols-[1fr_1fr_1fr] bg-neutral-800/60 px-4 py-3 text-xs font-semibold uppercase tracking-[0.06em] text-neutral-400 sm:px-5">
+          <div className="hidden grid-cols-[1fr_1fr_1fr] bg-neutral-800/60 px-5 py-3 text-xs font-semibold uppercase tracking-[0.06em] text-neutral-400 sm:grid">
             <span>Question</span>
             <span>A guessing tool</span>
             <span className="text-mango-400">MangoDocs</span>
@@ -49,23 +49,32 @@ export function Honesty() {
           {COMPARE.map((row, i) => (
             <div
               key={row.question}
-              className="grid grid-cols-[1fr_1fr_1fr] gap-3 border-t border-neutral-800 px-4 py-4 text-sm sm:px-5"
+              className="grid gap-1.5 border-t border-neutral-800 px-4 py-4 text-sm max-sm:[&:nth-child(2)]:border-t-0 sm:grid-cols-[1fr_1fr_1fr] sm:gap-3 sm:px-5"
             >
               <span className="font-medium text-neutral-100">{row.question}</span>
-              <span className="relative text-neutral-400">
-                {row.guess}
-                <span
-                  aria-hidden="true"
-                  style={{ transitionDelay: `${i * ROW_STAGGER_MS}ms` }}
-                  className="strike-overlay absolute inset-0 line-through decoration-neutral-500"
-                >
+              {/* Phones stack each row, so the column headings become inline labels. */}
+              <span className="text-neutral-400">
+                <span className="mr-2 text-xs font-semibold uppercase tracking-[0.06em] text-neutral-500 sm:hidden">
+                  Guess
+                </span>
+                <span className="relative">
                   {row.guess}
+                  <span
+                    aria-hidden="true"
+                    style={{ transitionDelay: `${i * ROW_STAGGER_MS}ms` }}
+                    className="strike-overlay absolute inset-0 line-through decoration-neutral-500"
+                  >
+                    {row.guess}
+                  </span>
                 </span>
               </span>
               <span
                 style={{ transitionDelay: `${i * ROW_STAGGER_MS + ANSWER_AFTER_MS}ms` }}
                 className="honest-answer font-medium text-neutral-50"
               >
+                <span className="mr-2 text-xs font-semibold uppercase tracking-[0.06em] text-mango-400 sm:hidden">
+                  MangoDocs
+                </span>
                 {row.honest}
               </span>
             </div>

@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useRef, useState, type KeyboardEvent } from 'react'
 import { SectionHeading } from '@/components/Section'
+import { TourScreen } from '@/components/tour/Screens'
 
 const TOUR = [
   {
@@ -56,7 +57,36 @@ export function ProductTour() {
   const [active, setActive] = useState(TOUR[0].id)
   // The first panel is just there on load; only a tab change animates.
   const [changed, setChanged] = useState(false)
-  const current = TOUR.find((t) => t.id === active) ?? TOUR[0]
+  const tabs = useRef<(HTMLButtonElement | null)[]>([])
+  const index = Math.max(
+    0,
+    TOUR.findIndex((t) => t.id === active),
+  )
+  const current = TOUR[index]
+
+  function select(i: number, focus = false) {
+    const next = TOUR[(i + TOUR.length) % TOUR.length]
+    if (focus) tabs.current[TOUR.indexOf(next)]?.focus()
+    if (next.id === active) return
+    setActive(next.id)
+    setChanged(true)
+  }
+
+  // WAI-ARIA tabs: arrows move and select, Home/End jump. Up/Down too, since
+  // the list is vertical on desktop.
+  function onKeyDown(e: KeyboardEvent) {
+    const keys: Record<string, number> = {
+      ArrowRight: index + 1,
+      ArrowDown: index + 1,
+      ArrowLeft: index - 1,
+      ArrowUp: index - 1,
+      Home: 0,
+      End: TOUR.length - 1,
+    }
+    if (!(e.key in keys)) return
+    e.preventDefault()
+    select(keys[e.key], true)
+  }
 
   return (
     <section id="product" className="scroll-mt-16 py-20 sm:py-28">
@@ -67,47 +97,62 @@ export function ProductTour() {
           lede="From a portfolio-wide view down to the exact clause — every screen built on the same rule: extract, don’t fabricate."
         />
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[16rem_1fr]">
-          <div
-            role="tablist"
-            aria-label="Product areas"
-            className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 lg:mx-0 lg:flex-col lg:px-0"
-          >
-            {TOUR.map((t) => (
-              <button
-                key={t.id}
-                role="tab"
-                type="button"
-                id={`tab-${t.id}`}
-                aria-selected={t.id === active}
-                aria-controls="tour-panel"
-                onClick={() => {
-                  if (t.id === active) return
-                  setActive(t.id)
-                  setChanged(true)
-                }}
-                className={`shrink-0 whitespace-nowrap rounded-md px-4 py-2.5 text-left text-sm font-medium transition-colors ${
-                  t.id === active
-                    ? 'bg-neutral-900 text-neutral-50'
-                    : 'text-ink-secondary hover:bg-surface-sunken hover:text-ink'
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
+        <div className="mt-12 grid gap-8 lg:grid-cols-[15rem_1fr] lg:gap-10">
+          <div className="min-w-0">
+            <div
+              role="tablist"
+              aria-label="Product areas"
+              aria-orientation="vertical"
+              onKeyDown={onKeyDown}
+              className="-mx-5 flex gap-1.5 overflow-x-auto px-5 pb-1 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:px-0"
+            >
+              {TOUR.map((t, i) => {
+                const selected = t.id === active
+                return (
+                  <button
+                    key={t.id}
+                    ref={(el) => {
+                      tabs.current[i] = el
+                    }}
+                    role="tab"
+                    type="button"
+                    id={`tab-${t.id}`}
+                    aria-selected={selected}
+                    aria-controls="tour-panel"
+                    tabIndex={selected ? 0 : -1}
+                    onClick={() => select(i)}
+                    className={`shrink-0 whitespace-nowrap rounded-md px-4 py-2.5 text-left text-sm font-medium transition-colors duration-150 ${
+                      selected
+                        ? 'bg-neutral-900 text-neutral-50'
+                        : 'text-ink-secondary hover:bg-surface-sunken hover:text-ink'
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                )
+              })}
+            </div>
+
+            <div key={current.id} className={`mt-6 lg:mt-8 ${changed ? 'tour-swap' : ''}`} aria-live="polite">
+              <h3 className="text-xl font-semibold tracking-tight text-ink">{current.title}</h3>
+              <p className="mt-2 leading-relaxed text-ink-secondary">{current.body}</p>
+            </div>
           </div>
 
-          <div
-            id="tour-panel"
-            role="tabpanel"
-            aria-labelledby={`tab-${current.id}`}
-            className="flex min-h-[16rem] flex-col justify-end rounded-xl border border-border bg-gradient-to-br from-mango-50 via-surface to-surface p-8 sm:p-12"
-          >
-            <div key={current.id} className={changed ? 'tour-swap' : undefined}>
-              <p className="font-mono text-xs uppercase tracking-[0.08em] text-mango-800">{current.label}</p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{current.title}</h3>
-              <p className="mt-3 max-w-xl text-lg leading-relaxed text-ink-secondary">{current.body}</p>
+          <div id="tour-panel" role="tabpanel" aria-labelledby={`tab-${current.id}`} className="relative min-w-0">
+            <div
+              aria-hidden="true"
+              className="absolute -inset-x-6 -inset-y-8 -z-10 rounded-[32px] bg-gradient-to-br from-mango-100/80 via-mango-50/60 to-transparent blur-2xl"
+            />
+            <div
+              key={current.id}
+              className={changed ? 'tour-screen-swap' : undefined}
+              role="img"
+              aria-label={`MangoDocs ${current.label} screen, with sample data`}
+            >
+              <TourScreen id={current.id} />
             </div>
+            <p className="mt-3 text-right text-xs text-ink-muted">Shown with sample data.</p>
           </div>
         </div>
       </div>

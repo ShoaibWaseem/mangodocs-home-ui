@@ -7,8 +7,8 @@ import { SectionHeading } from '@/components/Section'
 const ITEMS = [
   {
     icon: Eye,
-    title: 'Read-only connectors',
-    body: 'MangoDocs reads from Google Drive and SharePoint. It never moves, edits or deletes your files.',
+    title: 'Your files stay untouched',
+    body: 'MangoDocs reads from Google Drive and SharePoint. It never moves, edits or deletes your existing files.',
   },
   {
     icon: MapPin,

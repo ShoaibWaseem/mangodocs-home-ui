@@ -7,6 +7,7 @@ import { Features } from '@/sections/Features'
 import { Honesty } from '@/sections/Honesty'
 import { ProductTour } from '@/sections/ProductTour'
 import { Security } from '@/sections/Security'
+import { Faq } from '@/sections/Faq'
 import { InterestForm } from '@/sections/InterestForm'
 import { Footer } from '@/sections/Footer'
 
@@ -23,6 +24,7 @@ export function App() {
         <Honesty />
         <ProductTour />
         <Security />
+        <Faq />
         <InterestForm />
       </main>
       <Footer />

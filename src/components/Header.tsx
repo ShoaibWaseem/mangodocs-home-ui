@@ -5,10 +5,11 @@ import { ButtonLink } from '@/components/Button'
 import { APP_URL, DEMO_URL } from '@/config'
 
 const NAV = [
-  { href: '#how-it-works', label: 'How it works' },
-  { href: '#features', label: 'Features' },
-  { href: '#product', label: 'Product' },
-  { href: '#security', label: 'Security' },
+  { href: '/#how-it-works', label: 'How it works' },
+  { href: '/#features', label: 'Features' },
+  { href: '/#product', label: 'Product' },
+  { href: '/#security', label: 'Security' },
+  { href: '/#faq', label: 'FAQ' },
 ]
 
 export function Header() {
@@ -29,7 +30,7 @@ export function Header() {
       }`}
     >
       <div className="container flex h-16 max-w-6xl items-center justify-between">
-        <a href="#top" aria-label="MangoDocs home">
+        <a href="/#top" aria-label="MangoDocs home">
           <Logo />
         </a>
 

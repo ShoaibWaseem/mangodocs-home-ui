@@ -3,7 +3,7 @@ import { ButtonLink } from '@/components/Button'
 import { MangoSwirl } from '@/components/MangoSwirl'
 import { DEMO_URL } from '@/config'
 
-const POINTS = ['Google Drive & SharePoint', 'Read-only, no migration', 'Every fact cited']
+const POINTS = ['Google Drive & SharePoint', 'Nothing moved or migrated', 'Every fact cited']
 
 export function Hero() {
   return (

@@ -68,8 +68,8 @@ const config: Config = {
         info: { 100: 'var(--info-100)', 500: 'var(--info-500)', 700: 'var(--info-700)' },
       },
       fontFamily: {
-        sans: ['Archivo', 'system-ui', 'sans-serif'],
-        serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+        sans: ['"Archivo Variable"', 'Archivo', 'system-ui', 'sans-serif'],
+        serif: ['"Source Serif 4 Variable"', '"Source Serif 4"', 'Georgia', 'serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       borderRadius: {

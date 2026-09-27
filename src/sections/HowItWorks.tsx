@@ -6,7 +6,7 @@ const STEPS = [
   {
     icon: FolderSync,
     title: 'Connect a folder',
-    body: 'Point MangoDocs at Google Drive or SharePoint. Access is read-only — no migration, no new filing system, nothing moved.',
+    body: 'Point MangoDocs at Google Drive or SharePoint. Your contracts stay where they are — no migration, no new filing system, nothing moved or edited.',
   },
   {
     icon: ScanText,
