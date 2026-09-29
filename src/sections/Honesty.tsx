@@ -56,15 +56,8 @@ export function Honesty() {
                 <span className="mr-2 text-xs font-semibold uppercase tracking-[0.06em] text-neutral-500 sm:hidden">
                   Guess
                 </span>
-                <span className="relative">
+                <span style={{ transitionDelay: `${i * ROW_STAGGER_MS}ms` }} className="strike">
                   {row.guess}
-                  <span
-                    aria-hidden="true"
-                    style={{ transitionDelay: `${i * ROW_STAGGER_MS}ms` }}
-                    className="strike-overlay absolute inset-0 line-through decoration-neutral-500"
-                  >
-                    {row.guess}
-                  </span>
                 </span>
               </span>
               <span

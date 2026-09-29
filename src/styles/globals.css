@@ -168,21 +168,28 @@
 
 /* ---------------------------------------------------------------------------
    Honesty table: the strikethrough draws across each "guess" once the table
-   scrolls into view. An overlay copy of the text carries the line-through and
-   is revealed left-to-right with clip-path, so it works on wrapped text too.
+   scrolls into view. The line is a background strip growing left to right on
+   the text itself (it follows wrapped lines too). An earlier version laid a
+   second, struck-through copy of the text on top, which drifted out of line
+   in some mobile browsers and showed the words twice.
    --------------------------------------------------------------------------- */
-.strike-overlay {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 400ms var(--ease-in-out);
+.strike {
+  background-image: linear-gradient(var(--neutral-500), var(--neutral-500));
+  background-repeat: no-repeat;
+  background-position: 0 58%;
+  background-size: 0% 1.5px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 400ms var(--ease-in-out);
+}
+
+[data-visible] .strike {
+  background-size: 100% 1.5px;
 }
 
 .honest-answer {
   opacity: 0;
   transition: opacity 250ms var(--ease-out);
-}
-
-[data-visible] .strike-overlay {
-  clip-path: inset(0 0 0 0);
 }
 
 [data-visible] .honest-answer {
@@ -484,14 +491,9 @@
     animation: atom-fade-in 300ms var(--ease-out) both;
   }
 
-  .strike-overlay {
-    clip-path: none;
-    opacity: 0;
-    transition: opacity 250ms var(--ease-out);
-  }
-
-  [data-visible] .strike-overlay {
-    opacity: 1;
+  /* The line simply appears, no drawing. */
+  .strike {
+    transition: none;
   }
 
   .mobile-menu,
