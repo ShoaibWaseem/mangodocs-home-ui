@@ -253,7 +253,7 @@ function Diagram({ layout: l, id, className }: { layout: Layout; id: string; cla
             fontSize={small ? 10.5 : 14}
             fill="var(--neutral-400)"
           >
-            {small ? 'One source' : 'One searchable source'}
+            {small ? 'One library' : 'One searchable library'}
           </text>
         </g>
       </g>

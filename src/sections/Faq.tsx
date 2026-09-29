@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     q: 'What happens when a contract doesn’t say something?',
-    a: 'MangoDocs tells you it isn’t stated. It won’t fill the gap with a typical value or a best guess — a missing governing-law clause shows as “Not stated in document”, and counts towards your missing-terms report.',
+    a: 'MangoDocs shows it as not stated. It doesn’t fill the gap with a typical value or a guess. A missing governing-law clause appears as “Not stated in document” and is counted in your missing-terms report.',
   },
   {
     q: 'How do we know an extracted term is right?',
@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     q: 'Where is our data stored and processed?',
-    a: 'The application and its database run in Google Cloud’s London region. Contract text is read by Google’s Gemini models under Google’s enterprise data-processing terms; that processing isn’t guaranteed to stay in the UK or EU. We’d rather tell you that plainly than bury it.',
+    a: 'The application and its database run in Google Cloud’s London region. Contract text is read by Google’s Gemini models under Google’s enterprise data-processing terms; that processing isn’t guaranteed to stay in the UK or EU.',
   },
   {
     q: 'Can it read scanned PDFs?',
@@ -38,18 +38,16 @@ export function Faq() {
       <div className="container grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
         <div>
           <Eyebrow>Questions</Eyebrow>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            The things legal teams ask first.
-          </h2>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Common questions.</h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-secondary">
-            Something not covered here?{' '}
+            Anything else?{' '}
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className="font-medium text-primary-text underline decoration-mango-300 underline-offset-4 hover:decoration-mango-700"
             >
               Email us
             </a>{' '}
-            — a person will answer.
+            and we’ll reply.
           </p>
         </div>
 

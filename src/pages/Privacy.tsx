@@ -43,8 +43,8 @@ export function Privacy() {
 
         <H>What we collect</H>
         <P>
-          Only what you type into the “Request a demo” form: your name, work email, company, and — if you choose to add
-          them — your role and a message.
+          Only what you type into the “Request a demo” form: your name, work email and company, plus your role and a
+          message if you add them.
         </P>
         <P>
           Like any website, the services that host it record technical information such as IP addresses and browser

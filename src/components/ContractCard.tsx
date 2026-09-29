@@ -37,7 +37,7 @@ export function ContractCard() {
             <FileText className="h-[18px] w-[18px]" />
           </span>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-ink">Kestrel — Master Services Agreement</p>
+            <p className="truncate text-sm font-semibold text-ink">Kestrel Master Services Agreement</p>
             <p className="truncate text-xs text-ink-muted">Google Drive · Supplier contracts / 2025</p>
           </div>
           <span className="ml-auto shrink-0 rounded-full bg-mango-100 px-2.5 py-1 text-xs font-semibold text-mango-800">

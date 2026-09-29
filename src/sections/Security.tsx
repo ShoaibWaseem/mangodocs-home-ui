@@ -33,8 +33,8 @@ export function Security() {
       <div className="container max-w-6xl">
         <SectionHeading
           eyebrow="Security"
-          title="Built for documents that matter."
-          lede="Your contracts stay where they are. MangoDocs just reads them."
+          title="How your contracts are protected."
+          lede="Your contracts stay in your own Drive or SharePoint. MangoDocs reads them there."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {ITEMS.map((item) => (

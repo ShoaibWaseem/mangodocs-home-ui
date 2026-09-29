@@ -19,8 +19,8 @@ export function Hero() {
             guesses.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-secondary">
-            Connect MangoDocs to the folders your contracts already live in. It reads every one, tracks every renewal
-            and obligation, and shows you the clause behind every fact. When a contract doesn’t say something, it says
+            MangoDocs connects to the folders where your contracts are stored. It reads each contract, tracks renewals
+            and obligations, and links every fact to its clause. If a contract doesn’t state something, MangoDocs says
             so.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

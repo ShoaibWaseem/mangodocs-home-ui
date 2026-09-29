@@ -9,69 +9,65 @@ const TOUR = [
   {
     id: 'home',
     label: 'Home',
-    title: 'The whole portfolio at a glance',
-    body: 'What’s active, what’s expiring, what needs attention — real activity from your real contracts.',
+    title: 'Portfolio overview',
+    body: 'What’s active, what’s expiring and what needs attention across all your contracts.',
     capabilities: [
-      'Active, expiring and high-risk contracts at a glance',
-      'An obligations recap across the whole portfolio',
-      'Risk flags that need someone’s attention',
-      'Recent activity from your own contracts',
+      'Active, expiring and high-risk contract counts',
+      'An obligations summary across all contracts',
+      'Risk flags waiting for review',
+      'Recent activity',
     ],
   },
   {
     id: 'repository',
     label: 'Repository',
-    title: 'Every contract, your way',
-    body: 'Table, board or Gantt timeline, filterable and sortable however your team works, with full CSV export.',
-    capabilities: [
-      'Table, board or Gantt timeline views',
-      'Filter and sort to match how your team works',
-      'Full CSV export of everything extracted',
-    ],
+    title: 'All your contracts',
+    body: 'Table, board or Gantt timeline views, with filters, sorting and CSV export.',
+    capabilities: ['Table, board or Gantt timeline views', 'Filters and sorting', 'CSV export of extracted data'],
   },
   {
     id: 'contract',
     label: 'Contract detail',
-    title: 'One page with everything',
-    body: 'Key terms, parties and signatories, obligations, risk flags, related documents — and a link straight back to the source file.',
+    title: 'Key terms and their sources',
+    body: 'Key terms, parties, signatories, obligations, risk flags and related documents, with a link to the source file.',
     capabilities: [
       'Key terms, each linked to its clause and page',
       'Parties, signatories and obligations',
-      'Risk flags, with the fact behind each one',
+      'Risk flags with the finding behind each one',
       'Corrections recorded in the audit trail',
     ],
   },
   {
     id: 'renewals',
     label: 'Renewals',
-    title: 'Start renewal conversations first',
-    body: 'A 400-day runway before every expiry, so the conversation starts on your timeline, not the counterparty’s.',
+    title: 'Renewals from 400 days out',
+    body: 'Contracts appear 400 days before they expire, so renewal talks can start early.',
     capabilities: [
-      'Every contract inside a 400-day renewal horizon',
+      'Contracts expiring in the next 400 days',
       'Auto-renew status and notice deadlines, taken from the contract',
-      'Dates come from the contract itself, never estimated',
+      'No estimated dates',
     ],
   },
   {
     id: 'search',
     label: 'Search & Ask',
-    title: 'One box for keywords and questions',
-    body: 'Search for a clause or ask a full question — answers come with citations you can check.',
+    title: 'Keyword search and questions',
+    body: 'Search for a clause or ask a question. Answers include citations you can check.',
     capabilities: [
       'Keyword search for any clause or phrase',
       'Plain-English questions, answered with citations',
       'Each citation opens the paragraph it came from',
-      'Past questions kept, so answers can be revisited',
+      'Saved question history',
     ],
   },
   {
     id: 'reporting',
     label: 'Reporting',
-    title: 'Numbers computed from what was found',
-    body: 'Risk distribution, missing key terms by contract type, retention status, obligation completion — never a sample dashboard.',
+    title: 'Reports from your contracts',
+    body: 'Risk by contract type, missing key terms, retention status and obligation completion, calculated from your own data.',
     capabilities: [
       'Risk level by contract type',
-      'Key-terms coverage: what your contracts don’t say',
+      'Key terms missing, by contract type',
       'Obligations completed on time',
       'Retention status and legal holds',
     ],
@@ -79,23 +75,23 @@ const TOUR = [
   {
     id: 'counterparties',
     label: 'Counterparties',
-    title: 'Everyone you do business with',
-    body: 'Rolled up across every contract that names them: how many, how much, what’s open, what’s at risk.',
+    title: 'Contracts by counterparty',
+    body: 'For each counterparty: how many contracts, their value, open obligations and risk.',
     capabilities: [
-      'Every party rolled up across the contracts that name them',
+      'Contracts grouped by counterparty',
       'Open obligations and risk per counterparty',
-      'Duplicate counterparties merged into one',
+      'Merge duplicate counterparties',
     ],
   },
   {
     id: 'admin',
     label: 'Admin',
-    title: 'Control in one place',
-    body: 'Users and roles, retention policy per contract type, audit log, risk thresholds and every connected source.',
+    title: 'Users, policies and settings',
+    body: 'Users and roles, retention policy by contract type, the audit log, risk thresholds and connected sources.',
     capabilities: [
       'Users, roles and access rules',
       'Retention policy per contract type',
-      'A full audit log of who did what, and when',
+      'Audit log of every action',
       'Risk thresholds, notifications and connected sources',
     ],
   },
@@ -140,9 +136,9 @@ export function ProductTour() {
     <section id="product" className="scroll-mt-16 py-20 sm:py-28">
       <div className="container max-w-6xl">
         <SectionHeading
-          eyebrow="A tour of the product"
-          title="Everything a contract team needs, in one place."
-          lede="From a portfolio-wide view down to the exact clause — every screen built on the same rule: extract, don’t fabricate."
+          eyebrow="The product"
+          title="What each area of MangoDocs does."
+          lede="From the full portfolio down to a single clause. Every figure comes from what your contracts say."
         />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[15rem_1fr] lg:gap-10">

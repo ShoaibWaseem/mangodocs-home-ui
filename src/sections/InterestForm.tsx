@@ -80,14 +80,13 @@ export function InterestForm() {
         <div className="lg:pt-4">
           <Eyebrow>Get early access</Eyebrow>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            See what’s really in your contracts.
+            See what’s in your contracts.
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-secondary">
-            Tell us a little about your team and we’ll be in touch to set up a demo on your own documents — renewals,
-            obligations and risk, every fact cited.
+            Tell us about your team and we’ll arrange a demo using your own contracts.
           </p>
           <p className="mt-6 text-sm text-ink-muted">
-            Rather email?{' '}
+            Prefer email?{' '}
             <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium text-primary-text underline underline-offset-2">
               {CONTACT_EMAIL}
             </a>
@@ -98,10 +97,8 @@ export function InterestForm() {
           {status === 'done' ? (
             <div className="flex min-h-[22rem] flex-col items-center justify-center text-center animate-in-soft">
               <CheckCircle2 className="h-10 w-10 text-success-500" />
-              <h3 className="mt-4 text-xl font-semibold text-ink">Thanks — we’ll be in touch.</h3>
-              <p className="mt-2 max-w-sm text-ink-secondary">
-                We’ve got your details and will reply to your work email shortly.
-              </p>
+              <h3 className="mt-4 text-xl font-semibold text-ink">Thanks, we’ll be in touch.</h3>
+              <p className="mt-2 max-w-sm text-ink-secondary">We’ll reply to your work email shortly.</p>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="grid gap-5">

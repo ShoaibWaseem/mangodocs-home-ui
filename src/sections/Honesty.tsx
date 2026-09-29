@@ -4,7 +4,7 @@ import { useInViewOnce } from '@/lib/useInViewOnce'
 const COMPARE = [
   { question: 'Governing law?', guess: 'England & Wales', honest: 'Not stated in document' },
   { question: 'Liability cap?', guess: '“Standard” cap applies', honest: '£2,000,000 · §9.1, p.7' },
-  { question: 'Risk rating?', guess: '72% confidence', honest: 'High — no termination right found' },
+  { question: 'Risk rating?', guess: '72% confidence', honest: 'High: no termination right found' },
 ]
 
 // Per row: the strike draws (400ms), then the honest answer fades in.
@@ -26,13 +26,12 @@ export function Honesty() {
             knows.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-neutral-300">
-            Most contract-AI tools hand you a summary and ask you to trust it. MangoDocs shows its work: every fact
-            traces to the document it came from, every risk flag to the clause behind it, every action to the person who
-            took it.
+            Many contract AI tools give you a summary and expect you to trust it. MangoDocs shows its sources: each fact
+            links to the document it came from, each risk flag to the clause behind it, and each action to the person
+            who took it.
           </p>
           <p className="mt-4 text-lg leading-relaxed text-neutral-300">
-            And when a document genuinely doesn’t say something, MangoDocs tells you — instead of quietly filling the
-            gap with something plausible.
+            If a document doesn’t state something, MangoDocs says so rather than filling the gap.
           </p>
         </div>
 

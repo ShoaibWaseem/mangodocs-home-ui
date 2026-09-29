@@ -13,43 +13,43 @@ import { SectionHeading } from '@/components/Section'
 const FEATURES = [
   {
     icon: CalendarClock,
-    title: 'Renewals, on your timeline',
-    body: 'A 400-day runway before every expiry, computed from the real extracted date — not a spreadsheet that went stale.',
+    title: 'Renewal tracking',
+    body: 'Each expiry is tracked from 400 days out, using the date extracted from the contract.',
   },
   {
     icon: ClipboardCheck,
-    title: 'Obligations with real due dates',
-    body: 'Every promise across every contract in one list, with a human-confirmed due date and an overdue filter that means something.',
+    title: 'Obligations and due dates',
+    body: 'Obligations from all your contracts in one list, each with a confirmed due date and an overdue filter.',
   },
   {
     icon: TriangleAlert,
-    title: 'Risk you can explain',
-    body: 'No black-box score. Every flag traces to a real fact — a missing liability cap, no termination right, no data-processing clause.',
+    title: 'Explainable risk flags',
+    body: 'Each flag points to a specific finding, such as a missing liability cap, no termination right or no data-processing clause.',
   },
   {
     icon: MessageSquareText,
-    title: 'Ask in plain English',
-    body: '“Which contracts expire in the next 90 days?” Every answer cites the contracts it came from — or says there aren’t any.',
+    title: 'Questions in plain English',
+    body: 'Ask “Which contracts expire in the next 90 days?” and the answer cites the contracts it used, or says there are none.',
   },
   {
     icon: GitPullRequestArrow,
-    title: 'Approvals that route themselves',
-    body: 'Set a rule once — “supplier agreements over £250k need Finance” — and the right contracts reach the right people.',
+    title: 'Approval routing',
+    body: 'Set a rule such as “supplier agreements over £250k need Finance” and matching contracts go to the right approvers.',
   },
   {
     icon: FilePen,
-    title: 'Drafting from your own templates',
-    body: 'Fill real values into your approved wording. Nothing invented, nothing left half-filled.',
+    title: 'Drafting from templates',
+    body: 'Start new contracts from your approved templates and clause wording.',
   },
   {
     icon: History,
-    title: 'An audit trail that’s real',
-    body: 'Every approval, signature, hold and retention decision logged with who, when and why — at the moment it happened.',
+    title: 'Audit trail',
+    body: 'Every approval, signature, legal hold and retention decision is logged with who, when and why.',
   },
   {
     icon: Lock,
     title: 'Retention & legal holds',
-    body: 'Contracts past retention are flagged, never auto-deleted. A legal hold overrides everything until a person releases it.',
+    body: 'Contracts past their retention period are flagged for review, not deleted automatically. A legal hold stays in place until someone releases it.',
   },
 ]
 
@@ -59,7 +59,7 @@ export function Features() {
       <div className="container max-w-6xl">
         <SectionHeading
           eyebrow="What it does"
-          title="Reads contracts the way a lawyer would, at the speed a computer can."
+          title="Renewals, obligations, risk and approvals, all from the same extracted terms."
         />
         <div className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map((f) => (

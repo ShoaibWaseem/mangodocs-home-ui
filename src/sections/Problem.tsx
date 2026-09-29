@@ -3,15 +3,15 @@ import { SectionHeading } from '@/components/Section'
 const PAINS = [
   {
     title: 'The renewal that auto-fires',
-    body: 'Because nobody saw the ninety-day notice window buried on page eleven.',
+    body: 'Nobody saw the 90-day notice period on page 11.',
   },
   {
     title: 'The obligation nobody confirmed',
-    body: 'A report owed, a fee due, a notice to serve — tracked in someone’s inbox, if at all.',
+    body: 'A report owed, a fee due or a notice to serve, tracked in someone’s inbox or not at all.',
   },
   {
     title: 'The clause nobody can quote',
-    body: 'Without re-reading forty pages, the night before the meeting where it matters.',
+    body: 'Not without re-reading 40 pages the night before the meeting.',
   },
 ]
 
@@ -21,8 +21,8 @@ export function Problem() {
       <div className="container max-w-6xl">
         <SectionHeading
           eyebrow="The problem"
-          title="It’s not the contracts you can find that keep you up at night."
-          lede="It’s the ones you can’t. Most teams already have their contracts somewhere sensible — they just can’t see what’s inside them."
+          title="The risk is in the terms nobody has read."
+          lede="Most teams already store their contracts somewhere sensible. What they can’t easily see is what those contracts say."
         />
         <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
           {PAINS.map((p, i) => (
