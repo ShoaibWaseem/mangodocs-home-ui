@@ -10,7 +10,7 @@ export function Hero() {
       className="relative overflow-hidden bg-gradient-to-b from-neutral-800 via-neutral-900 to-neutral-950 text-neutral-50"
     >
       <div className="container grid max-w-6xl items-center gap-12 pb-20 pt-32 sm:pb-28 sm:pt-40 lg:grid-cols-2 lg:gap-16">
-        <div className="lg:order-2">
+        <div>
           <Meta items={['Contract intelligence', 'For legal & ops teams']} className="text-white/55" />
           <h1 className="display-1 mt-8">
             Contract intelligence that <span className="text-mango-400">never</span> guesses.
@@ -31,7 +31,7 @@ export function Hero() {
           </div>
           <p className="caps mt-6 text-[10px] text-white/55">Nothing moved or migrated</p>
         </div>
-        <div className="lg:order-1">
+        <div>
           <MangoAtom />
         </div>
       </div>
