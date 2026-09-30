@@ -1,6 +1,5 @@
 import { useRef, useState, type KeyboardEvent } from 'react'
-import { Check } from 'lucide-react'
-import { SectionHeading } from '@/components/Section'
+import { Band, SectionHeading } from '@/components/Section'
 
 // Describes what each area does, deliberately without showing the app's
 // screens. Every capability must be literally true of mangodocs-ui.
@@ -133,75 +132,67 @@ export function ProductTour() {
   }
 
   return (
-    <section id="product" className="scroll-mt-16 py-20 sm:py-28">
-      <div className="container max-w-6xl">
-        <SectionHeading
-          eyebrow="The product"
-          title="What each area of MangoDocs does."
-          lede="From the full portfolio down to a single clause. Every figure comes from what your contracts say."
-        />
+    <Band id="product">
+      <SectionHeading
+        eyebrow="The product"
+        title="What each area of MangoDocs does."
+        lede="From the full portfolio down to a single clause. Every figure comes from what your contracts say."
+      />
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[15rem_1fr] lg:gap-10">
-          <div className="min-w-0">
-            <div
-              role="tablist"
-              aria-label="Product areas"
-              aria-orientation="vertical"
-              onKeyDown={onKeyDown}
-              className="-mx-5 flex gap-1.5 overflow-x-auto px-5 pb-1 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:px-0"
-            >
-              {TOUR.map((t, i) => {
-                const selected = t.id === active
-                return (
-                  <button
-                    key={t.id}
-                    ref={(el) => {
-                      tabs.current[i] = el
-                    }}
-                    role="tab"
-                    type="button"
-                    id={`tab-${t.id}`}
-                    aria-selected={selected}
-                    aria-controls="tour-panel"
-                    tabIndex={selected ? 0 : -1}
-                    onClick={() => select(i)}
-                    className={`shrink-0 whitespace-nowrap rounded-md px-4 py-2.5 text-left text-sm font-medium transition-colors duration-150 ${
-                      selected
-                        ? 'bg-neutral-900 text-neutral-50'
-                        : 'text-ink-secondary hover:bg-surface-sunken hover:text-ink'
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                )
-              })}
-            </div>
-          </div>
+      <div className="mt-20 grid gap-12 lg:grid-cols-[15rem_1fr] lg:gap-20">
+        <div
+          role="tablist"
+          aria-label="Product areas"
+          aria-orientation="vertical"
+          onKeyDown={onKeyDown}
+          className="-mx-5 flex gap-7 overflow-x-auto border-b border-hairline px-5 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:gap-0 lg:border-b-0 lg:px-0"
+        >
+          {TOUR.map((t, i) => {
+            const selected = t.id === active
+            return (
+              <button
+                key={t.id}
+                ref={(el) => {
+                  tabs.current[i] = el
+                }}
+                role="tab"
+                type="button"
+                id={`tab-${t.id}`}
+                aria-selected={selected}
+                aria-controls="tour-panel"
+                tabIndex={selected ? 0 : -1}
+                onClick={() => select(i)}
+                className={`caps relative shrink-0 whitespace-nowrap py-4 text-left transition-colors duration-150 lg:border-t lg:border-hairline lg:py-5 lg:pl-5 lg:last:border-b ${
+                  selected ? 'text-ink' : 'text-ink-muted hover:text-ink'
+                }`}
+              >
+                {/* Mango marker: underline on phones, left bar on desktop. */}
+                <span
+                  aria-hidden="true"
+                  className={`absolute bg-mango-500 transition-opacity duration-150 max-lg:inset-x-0 max-lg:-bottom-px max-lg:h-0.5 lg:inset-y-4 lg:left-0 lg:w-0.5 ${
+                    selected ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+                {t.label}
+              </button>
+            )
+          })}
+        </div>
 
-          <div
-            id="tour-panel"
-            role="tabpanel"
-            aria-labelledby={`tab-${current.id}`}
-            className="min-w-0 rounded-xl border border-border bg-gradient-to-br from-mango-50 via-surface to-surface p-7 sm:p-10"
-          >
-            <div key={current.id} className={changed ? 'tour-swap' : undefined}>
-              <p className="font-mono text-xs uppercase tracking-[0.08em] text-mango-800">{current.label}</p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{current.title}</h3>
-              <p className="mt-3 max-w-xl text-lg leading-relaxed text-ink-secondary">{current.body}</p>
-              <ul className="mt-8 grid gap-x-8 gap-y-4 border-t border-border pt-8 sm:grid-cols-2">
-                {current.capabilities.map((c) => (
-                  <li key={c} className="flex gap-3 leading-snug text-ink">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-mango-100 text-mango-800">
-                      <Check className="h-3 w-3" strokeWidth={3} />
-                    </span>
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div id="tour-panel" role="tabpanel" aria-labelledby={`tab-${current.id}`} className="min-w-0">
+          <div key={current.id} className={changed ? 'tour-swap' : undefined}>
+            <h3 className="display-2 text-ink">{current.title}</h3>
+            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-ink-muted">{current.body}</p>
+            <ul className="mt-12 grid gap-x-10 sm:grid-cols-2">
+              {current.capabilities.map((c) => (
+                <li key={c} className="border-t border-hairline py-5 text-[15px] text-ink">
+                  {c}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
-    </section>
+    </Band>
   )
 }

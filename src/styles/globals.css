@@ -42,7 +42,13 @@
   --info-500: #2f5d8a;
   --info-700: #224567;
 
-  --background: var(--neutral-50);
+  /* Editorial surfaces: sections alternate paper and stone, edge to edge. */
+  --paper: #fcfbf9;
+  --stone: #ece7df;
+  --field: #f6f3ee;
+  --hairline: rgba(20, 26, 31, 0.14);
+
+  --background: var(--paper);
   --surface: var(--neutral-0);
   --surface-sunken: var(--neutral-100);
   --border: var(--neutral-200);
@@ -105,6 +111,25 @@
   :focus-visible {
     outline: 2px solid var(--mango-700);
     outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Tiny, widely spaced uppercase label: eyebrows, meta lines, buttons. */
+  .caps {
+    @apply text-[11px] font-medium uppercase tracking-[0.24em];
+  }
+
+  .display-1 {
+    @apply font-display text-[2.75rem] font-light leading-[1.02] tracking-[-0.03em] sm:text-7xl;
+  }
+
+  .display-2 {
+    @apply font-display text-[2rem] font-light leading-[1.1] tracking-[-0.02em] sm:text-5xl;
+  }
+
+  .display-3 {
+    @apply font-display text-2xl font-light leading-snug tracking-[-0.02em];
   }
 }
 

@@ -159,7 +159,7 @@ function Diagram({ layout: l, id, className }: { layout: Layout; id: string; cla
                 y={y}
                 width={l.chip.w}
                 height={l.chip.h}
-                rx={10}
+                rx={0}
                 fill="var(--surface)"
                 stroke="var(--border)"
               />
@@ -219,14 +219,7 @@ function Diagram({ layout: l, id, className }: { layout: Layout; id: string; cla
 
         {/* The hub — one source. */}
         <g className="flow-hub">
-          <rect
-            x={l.hub.x}
-            y={l.hub.y}
-            width={l.hub.w}
-            height={l.hub.h}
-            rx={small ? 14 : 18}
-            fill="var(--neutral-900)"
-          />
+          <rect x={l.hub.x} y={l.hub.y} width={l.hub.w} height={l.hub.h} rx={0} fill="var(--neutral-900)" />
           <g
             transform={`translate(${hubCx - (small ? 9 : 13)}, ${l.hub.y + (small ? 18 : 26)}) scale(${small ? 0.11 : 0.16})`}
           >

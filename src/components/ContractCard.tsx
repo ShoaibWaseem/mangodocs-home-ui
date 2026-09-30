@@ -27,20 +27,16 @@ export function ContractCard() {
 
   return (
     <div ref={ref} data-visible={inView || undefined} className="reading-card relative">
-      <div
-        aria-hidden="true"
-        className="absolute -inset-6 -z-10 rounded-[28px] bg-gradient-to-br from-mango-100 via-mango-50 to-transparent opacity-80 blur-2xl"
-      />
-      <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-e3">
+      <div className="overflow-hidden border border-hairline bg-surface">
         <div className="flex items-center gap-3 border-b border-border px-5 py-4">
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-mango-50 text-mango-800">
-            <FileText className="h-[18px] w-[18px]" />
+          <span className="flex h-9 w-9 items-center justify-center bg-mango-50 text-mango-800">
+            <FileText className="h-[18px] w-[18px]" strokeWidth={1.5} />
           </span>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-ink">Kestrel Master Services Agreement</p>
+            <p className="text-sm font-medium text-ink">Kestrel Master Services Agreement</p>
             <p className="truncate text-xs text-ink-muted">Google Drive · Supplier contracts / 2025</p>
           </div>
-          <span className="ml-auto shrink-0 rounded-full bg-mango-100 px-2.5 py-1 text-xs font-semibold text-mango-800">
+          <span className="ml-auto caps shrink-0 bg-mango-100 px-2.5 py-1 text-[10px] text-mango-800">
             Expiring soon
           </span>
         </div>
@@ -55,16 +51,16 @@ export function ContractCard() {
               <dt className="text-xs font-medium text-ink-muted">{t.label}</dt>
               <dd className="flex min-w-0 items-center justify-between gap-2">
                 {t.missing ? (
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-border-strong px-2.5 py-0.5 text-xs font-medium text-ink-muted">
+                  <span className="inline-flex items-center gap-1.5 border border-dashed border-border-strong px-2.5 py-0.5 text-xs font-medium text-ink-muted">
                     {t.value}
                   </span>
                 ) : (
-                  <span className="truncate text-sm font-medium text-ink">{t.value}</span>
+                  <span className="text-sm font-medium text-ink">{t.value}</span>
                 )}
                 {t.cite && (
                   <span
                     style={{ animationDelay: `${rowDelay(i) + CITE_AFTER_MS}ms` }}
-                    className="extract-cite shrink-0 rounded bg-surface-sunken px-1.5 py-0.5 font-mono text-[11px] text-ink-secondary"
+                    className="extract-cite shrink-0 bg-surface-sunken px-1.5 py-0.5 font-mono text-[11px] text-ink-secondary"
                   >
                     {t.cite}
                   </span>

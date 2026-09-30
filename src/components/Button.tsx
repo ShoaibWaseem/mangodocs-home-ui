@@ -1,22 +1,22 @@
 import type { AnchorHTMLAttributes } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'ghost-inverted'
+// Square, uppercase, widely spaced: the editorial button. Mango is the one
+// colour on the page; everything else is ink, paper and stone.
+type Variant = 'dark' | 'mango' | 'ghost-light'
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-primary text-primary-foreground hover:bg-primary-hover shadow-e1',
-  secondary: 'bg-surface text-ink border border-border-strong hover:bg-surface-sunken',
-  'ghost-inverted': 'text-neutral-100 border border-neutral-700 hover:bg-neutral-800',
+  dark: 'bg-neutral-900 text-neutral-50 hover:bg-neutral-800',
+  mango: 'bg-mango-500 text-neutral-900 hover:bg-mango-400',
+  'ghost-light': 'text-white/80 ring-1 ring-inset ring-white/25 hover:bg-white/10 hover:text-white',
 }
 
+export const buttonClass = (variant: Variant = 'dark') =>
+  `caps inline-flex h-12 items-center justify-center gap-3 px-8 transition-[transform,background-color,color] duration-150 ease-out active:scale-[0.97] ${variants[variant]}`
+
 export function ButtonLink({
-  variant = 'primary',
+  variant = 'dark',
   className = '',
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: Variant }) {
-  return (
-    <a
-      className={`inline-flex h-11 items-center justify-center gap-2 rounded-md px-5 text-[0.9375rem] font-semibold transition-[transform,background-color] duration-150 ease-out active:scale-[0.97] ${variants[variant]} ${className}`}
-      {...props}
-    />
-  )
+  return <a className={`${buttonClass(variant)} ${className}`} {...props} />
 }

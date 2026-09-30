@@ -14,7 +14,7 @@ import { Footer } from '@/sections/Footer'
 export function App() {
   return (
     <div id="top">
-      <Header />
+      <Header overDark />
       <main>
         <Hero />
         <Problem />

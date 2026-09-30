@@ -75,10 +75,7 @@ export function MangoAtom() {
       role="img"
       aria-label="The MangoDocs mango at the centre of an atom, with documents of every format orbiting it"
     >
-      <div
-        aria-hidden="true"
-        className="absolute inset-[14%] -z-10 rounded-full bg-gradient-to-br from-mango-100 via-mango-50 to-transparent opacity-80 blur-2xl"
-      />
+      <div aria-hidden="true" className="absolute inset-[18%] -z-10 rounded-full bg-[rgba(232,140,30,0.18)] blur-3xl" />
       <div className="atom-scene absolute inset-0" aria-hidden="true">
         <div className="atom-nucleus">
           <svg viewBox="-20 0 200 200" className="h-full w-full">

@@ -16,6 +16,10 @@ const config: Config = {
     extend: {
       colors: {
         background: 'var(--background)',
+        paper: 'var(--paper)',
+        stone: 'var(--stone)',
+        field: 'var(--field)',
+        hairline: 'var(--hairline)',
         surface: {
           DEFAULT: 'var(--surface)',
           sunken: 'var(--surface-sunken)',
@@ -68,7 +72,8 @@ const config: Config = {
         info: { 100: 'var(--info-100)', 500: 'var(--info-500)', 700: 'var(--info-700)' },
       },
       fontFamily: {
-        sans: ['"Archivo Variable"', 'Archivo', 'system-ui', 'sans-serif'],
+        sans: ['"Figtree Variable"', 'Figtree', 'system-ui', 'sans-serif'],
+        display: ['"Outfit Variable"', 'Outfit', 'system-ui', 'sans-serif'],
         serif: ['"Source Serif 4 Variable"', '"Source Serif 4"', 'Georgia', 'serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },

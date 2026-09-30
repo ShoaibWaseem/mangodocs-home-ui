@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react'
-import { Eyebrow } from '@/components/Section'
+import { Band, SectionHeading } from '@/components/Section'
 import { CONTACT_EMAIL } from '@/config'
 
 // Every answer must be literally true of the deployed system, same rule as
@@ -34,16 +34,15 @@ const FAQS = [
 
 export function Faq() {
   return (
-    <section id="faq" className="scroll-mt-16 py-20 sm:py-28">
-      <div className="container grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
+    <Band id="faq">
+      <div className="grid gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
         <div>
-          <Eyebrow>Questions</Eyebrow>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Common questions.</h2>
-          <p className="mt-4 text-lg leading-relaxed text-ink-secondary">
+          <SectionHeading eyebrow="Questions" title="Common questions." />
+          <p className="mt-6 text-[15px] leading-relaxed text-ink-muted">
             Anything else?{' '}
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="font-medium text-primary-text underline decoration-mango-300 underline-offset-4 hover:decoration-mango-700"
+              className="text-ink underline decoration-mango-500 underline-offset-4 hover:decoration-ink"
             >
               Email us
             </a>{' '}
@@ -51,20 +50,21 @@ export function Faq() {
           </p>
         </div>
 
-        <div className="divide-y divide-border border-y border-border">
+        <div className="border-b border-hairline">
           {FAQS.map((f) => (
-            <details key={f.q} className="faq group">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-[1.0625rem] font-semibold text-ink [&::-webkit-details-marker]:hidden">
+            <details key={f.q} className="faq group border-t border-hairline">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-8 py-7 text-left font-display text-xl font-light tracking-[-0.01em] text-ink [&::-webkit-details-marker]:hidden">
                 {f.q}
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border-strong text-ink-secondary transition-[transform,background-color,border-color] duration-200 ease-out group-open:rotate-45 group-open:border-neutral-900 group-open:bg-neutral-900 group-open:text-neutral-50">
-                  <Plus className="h-3.5 w-3.5" />
-                </span>
+                <Plus
+                  className="h-5 w-5 shrink-0 text-mango-700 transition-transform duration-200 ease-out group-open:rotate-45"
+                  strokeWidth={1.25}
+                />
               </summary>
-              <p className="max-w-2xl pb-6 pr-12 leading-relaxed text-ink-secondary">{f.a}</p>
+              <p className="max-w-2xl pb-8 pr-12 text-[15px] leading-relaxed text-ink-muted">{f.a}</p>
             </details>
           ))}
         </div>
       </div>
-    </section>
+    </Band>
   )
 }

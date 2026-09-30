@@ -10,17 +10,17 @@ import { CONTACT_EMAIL } from '@/config'
 const UPDATED = '27 September 2026'
 
 function H({ children }: { children: ReactNode }) {
-  return <h2 className="mt-12 text-xl font-semibold tracking-tight text-ink">{children}</h2>
+  return <h2 className="display-3 mt-14 text-ink">{children}</h2>
 }
 
 function P({ children }: { children: ReactNode }) {
-  return <p className="mt-4 leading-relaxed text-ink-secondary">{children}</p>
+  return <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">{children}</p>
 }
 
 const Mail = () => (
   <a
     href={`mailto:${CONTACT_EMAIL}`}
-    className="font-medium text-primary-text underline decoration-mango-300 underline-offset-4 hover:decoration-mango-700"
+    className="text-ink underline decoration-mango-500 underline-offset-4 hover:decoration-ink"
   >
     {CONTACT_EMAIL}
   </a>
@@ -30,10 +30,10 @@ export function Privacy() {
   return (
     <div id="top">
       <Header />
-      <main className="container max-w-3xl py-16 sm:py-24">
-        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary-text">Privacy</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">Privacy notice</h1>
-        <p className="mt-4 text-sm text-ink-muted">Last updated {UPDATED}</p>
+      <main className="container max-w-3xl pb-24 pt-32 sm:pb-32 sm:pt-40">
+        <p className="caps text-mango-800">Privacy</p>
+        <h1 className="display-1 mt-6 text-ink">Privacy notice</h1>
+        <p className="caps mt-8 text-ink-muted">Last updated {UPDATED}</p>
 
         <P>
           This notice explains what happens to personal information you share with MangoDocs through this website,
@@ -80,7 +80,7 @@ export function Privacy() {
           handled your information, you can complain to the Information Commissioner’s Office at{' '}
           <a
             href="https://ico.org.uk/make-a-complaint/"
-            className="font-medium text-primary-text underline decoration-mango-300 underline-offset-4 hover:decoration-mango-700"
+            className="text-ink underline decoration-mango-500 underline-offset-4 hover:decoration-ink"
           >
             ico.org.uk
           </a>

@@ -6,87 +6,98 @@ import { APP_URL, DEMO_URL } from '@/config'
 
 const NAV = [
   { href: '/#how-it-works', label: 'How it works' },
-  { href: '/#features', label: 'Features' },
   { href: '/#product', label: 'Product' },
   { href: '/#security', label: 'Security' },
   { href: '/#faq', label: 'FAQ' },
 ]
 
-export function Header() {
+// Over the homepage's dark hero the header is transparent with light text;
+// once the hero scrolls away (or the menu opens) it becomes a paper bar.
+// Pages without a dark hero pass overDark={false} and are always the bar.
+export function Header({ overDark = false }: { overDark?: boolean }) {
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [pastHero, setPastHero] = useState(!overDark)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    if (!overDark) return
+    const hero = document.getElementById('hero')
+    const onScroll = () => setPastHero(window.scrollY > (hero?.offsetHeight ?? 600) - 64)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [overDark])
+
+  const light = !pastHero && !open
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-colors ${
-        scrolled || open ? 'border-b border-border bg-background/90 backdrop-blur' : 'border-b border-transparent'
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-200 ${
+        light ? 'bg-transparent text-neutral-50' : 'border-b border-hairline bg-paper text-ink'
       }`}
     >
       <div className="container flex h-16 max-w-6xl items-center justify-between">
         <a href="/#top" aria-label="MangoDocs home">
-          <Logo />
+          <Logo inverted={light} />
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-9 md:flex" aria-label="Main">
           {NAV.map((item) => (
-            <a key={item.href} href={item.href} className="text-sm font-medium text-ink-secondary hover:text-ink">
+            <a
+              key={item.href}
+              href={item.href}
+              className={`caps transition-colors ${light ? 'text-white/70 hover:text-white' : 'text-ink-muted hover:text-ink'}`}
+            >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <a href={APP_URL} className="text-sm font-semibold text-ink-secondary hover:text-ink">
+        <div className="hidden items-center gap-7 md:flex">
+          <a
+            href={APP_URL}
+            className={`caps transition-colors ${light ? 'text-white/70 hover:text-white' : 'text-ink-muted hover:text-ink'}`}
+          >
             Sign in
           </a>
-          <ButtonLink href={DEMO_URL} className="h-9 px-4 text-sm">
-            Book a demo
+          <ButtonLink href={DEMO_URL} variant={light ? 'mango' : 'dark'} className="h-10 px-5">
+            Request a demo
           </ButtonLink>
         </div>
 
         <button
           type="button"
-          className="-mr-2 inline-flex h-10 w-10 items-center justify-center rounded-md text-ink md:hidden"
+          className="-mr-2 inline-flex h-10 w-10 items-center justify-center md:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-5 w-5" strokeWidth={1.5} /> : <Menu className="h-5 w-5" strokeWidth={1.5} />}
         </button>
       </div>
 
       <nav
         data-open={open || undefined}
-        className="mobile-menu container max-w-6xl pb-6"
+        className="mobile-menu container max-w-6xl pb-8"
         aria-label="Mobile"
         id="mobile-menu"
       >
-        <ul className="flex flex-col gap-1">
+        <ul className="border-t border-hairline">
           {NAV.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-md px-2 py-2.5 text-base font-medium text-ink-secondary hover:bg-surface-sunken"
-              >
+            <li key={item.href} className="border-b border-hairline">
+              <a href={item.href} onClick={() => setOpen(false)} className="caps block py-4 text-ink">
                 {item.label}
               </a>
             </li>
           ))}
         </ul>
-        <div className="mt-4 flex flex-col gap-2">
-          <ButtonLink href={DEMO_URL}>Book a demo</ButtonLink>
-          <ButtonLink href={APP_URL} variant="secondary">
-            Sign in
+        <div className="mt-6 flex flex-col gap-3">
+          <ButtonLink href={DEMO_URL} onClick={() => setOpen(false)}>
+            Request a demo →
           </ButtonLink>
+          <a href={APP_URL} className="caps py-3 text-center text-ink-muted">
+            Sign in
+          </a>
         </div>
       </nav>
     </header>

@@ -1,13 +1,14 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
-import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
-import { Eyebrow } from '@/components/Section'
+import { CheckCircle2, Loader2 } from 'lucide-react'
+import { Band, Eyebrow, Meta } from '@/components/Section'
+import { buttonClass } from '@/components/Button'
 import { API_BASE_URL, CONTACT_EMAIL } from '@/config'
 
 type Status = 'idle' | 'submitting' | 'done' | 'error'
 type FieldErrors = Partial<Record<'name' | 'email' | 'company' | 'role' | 'message', string>>
 
 const inputClass =
-  'mt-1.5 block w-full rounded-md border border-border-strong bg-surface px-3.5 py-2.5 text-ink shadow-e1 transition-[border-color,box-shadow] duration-150 placeholder:text-ink-muted focus:border-mango-700 focus:outline-none focus:ring-2 focus:ring-mango-200 aria-[invalid=true]:border-danger-500'
+  'mt-2 block w-full rounded-none border-0 bg-field px-4 py-3 text-ink ring-1 ring-inset ring-transparent transition-[box-shadow] duration-150 placeholder:text-neutral-400 focus:outline-none focus:ring-mango-600 aria-[invalid=true]:ring-danger-500'
 
 function Field({
   id,
@@ -24,9 +25,9 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="text-sm font-medium text-ink">
+      <label htmlFor={id} className="caps text-ink-muted">
         {label}
-        {optional && <span className="font-normal text-ink-muted"> (optional)</span>}
+        {optional && <span className="normal-case tracking-normal"> (optional)</span>}
       </label>
       {children}
       {error && (
@@ -75,34 +76,36 @@ export function InterestForm() {
     errors[key] ? { 'aria-invalid': true, 'aria-describedby': `${key}-error` } : {}
 
   return (
-    <section id="interest" className="scroll-mt-16 border-t border-border bg-mango-50 py-20 sm:py-28">
-      <div className="container grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-        <div className="lg:pt-4">
-          <Eyebrow>Get early access</Eyebrow>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            See what’s in your contracts.
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-ink-secondary">
+    <Band id="interest" tone="stone">
+      <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <Eyebrow>Request a demo</Eyebrow>
+          <h2 className="display-1 mt-6 text-ink">See what’s in your contracts.</h2>
+          <Meta items={['Your own contracts', 'Every fact cited']} className="mt-8 text-ink" />
+          <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink-muted">
             Tell us about your team and we’ll arrange a demo using your own contracts.
           </p>
-          <p className="mt-6 text-sm text-ink-muted">
+          <p className="mt-6 text-[15px] text-ink-muted">
             Prefer email?{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium text-primary-text underline underline-offset-2">
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="text-ink underline decoration-mango-500 underline-offset-4 hover:decoration-ink"
+            >
               {CONTACT_EMAIL}
             </a>
           </p>
         </div>
 
-        <div className="rounded-xl border border-border bg-surface p-6 shadow-e2 sm:p-8">
+        <div>
           {status === 'done' ? (
-            <div className="flex min-h-[22rem] flex-col items-center justify-center text-center animate-in-soft">
-              <CheckCircle2 className="h-10 w-10 text-success-500" />
-              <h3 className="mt-4 text-xl font-semibold text-ink">Thanks, we’ll be in touch.</h3>
-              <p className="mt-2 max-w-sm text-ink-secondary">We’ll reply to your work email shortly.</p>
+            <div className="flex min-h-[22rem] flex-col justify-center border-t border-hairline animate-in-soft">
+              <CheckCircle2 className="h-8 w-8 text-mango-700" strokeWidth={1.25} />
+              <h3 className="display-3 mt-6 text-ink">Thanks, we’ll be in touch.</h3>
+              <p className="mt-3 max-w-sm text-[15px] text-ink-muted">We’ll reply to your work email shortly.</p>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="grid gap-5">
-              <div className="grid gap-5 sm:grid-cols-2">
+            <form onSubmit={onSubmit} className="grid gap-6">
+              <div className="grid gap-6 sm:grid-cols-2">
                 <Field id="name" label="Full name" error={errors.name}>
                   <input
                     id="name"
@@ -128,7 +131,7 @@ export function InterestForm() {
                   />
                 </Field>
               </div>
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-6 sm:grid-cols-2">
                 <Field id="company" label="Company" error={errors.company}>
                   <input
                     id="company"
@@ -170,38 +173,38 @@ export function InterestForm() {
               </div>
 
               {status === 'error' && (
-                <p role="alert" className="rounded-md bg-danger-100 px-3.5 py-2.5 text-sm text-danger-700">
+                <p role="alert" className="bg-danger-100 px-4 py-3 text-sm text-danger-700">
                   Something went wrong sending that. Please try again, or email us at {CONTACT_EMAIL}.
                 </p>
               )}
 
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-xs leading-relaxed text-ink-muted sm:max-w-[16rem]">
+              <div className="flex flex-col gap-5">
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className={`${buttonClass('dark')} w-full disabled:cursor-progress disabled:opacity-80 sm:w-fit`}
+                >
+                  {status === 'submitting' ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" /> Sending
+                    </>
+                  ) : (
+                    <>
+                      Request a demo <span aria-hidden="true">→</span>
+                    </>
+                  )}
+                </button>
+                <p className="text-xs leading-relaxed text-ink-muted">
                   We’ll only use these details to contact you about MangoDocs.{' '}
                   <a href="/privacy" className="underline underline-offset-2 hover:text-ink">
                     Privacy notice
                   </a>
                 </p>
-                <button
-                  type="submit"
-                  disabled={status === 'submitting'}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-neutral-900 px-5 text-[0.9375rem] font-semibold text-neutral-50 shadow-e1 transition-[transform,background-color] duration-150 ease-out hover:bg-neutral-800 active:scale-[0.97] disabled:cursor-progress disabled:opacity-80"
-                >
-                  {status === 'submitting' ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" /> Sending…
-                    </>
-                  ) : (
-                    <>
-                      Request a demo <ArrowRight className="h-4 w-4" />
-                    </>
-                  )}
-                </button>
               </div>
             </form>
           )}
         </div>
       </div>
-    </section>
+    </Band>
   )
 }

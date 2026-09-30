@@ -14,7 +14,11 @@ export function Logo({ inverted = false }: { inverted?: boolean }) {
   return (
     <span className="inline-flex items-center gap-2">
       <LogoMark className="h-7 w-7" />
-      <span className={`text-lg font-bold tracking-tight ${inverted ? 'text-neutral-50' : 'text-ink'}`}>MangoDocs</span>
+      <span
+        className={`font-display text-lg font-medium tracking-[-0.01em] ${inverted ? 'text-neutral-50' : 'text-ink'}`}
+      >
+        MangoDocs
+      </span>
     </span>
   )
 }

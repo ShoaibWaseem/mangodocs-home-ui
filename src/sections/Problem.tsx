@@ -1,4 +1,4 @@
-import { SectionHeading } from '@/components/Section'
+import { Band, Numbered, SectionHeading } from '@/components/Section'
 
 const PAINS = [
   {
@@ -17,23 +17,19 @@ const PAINS = [
 
 export function Problem() {
   return (
-    <section className="border-y border-border bg-surface py-20 sm:py-24">
-      <div className="container max-w-6xl">
-        <SectionHeading
-          eyebrow="The problem"
-          title="The risk is in the terms nobody has read."
-          lede="Most teams already store their contracts somewhere sensible. What they can’t easily see is what those contracts say."
-        />
-        <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
-          {PAINS.map((p, i) => (
-            <div key={p.title} className="bg-surface p-6 sm:p-8">
-              <p className="font-mono text-xs text-ink-muted">0{i + 1}</p>
-              <h3 className="mt-3 text-lg font-semibold text-ink">{p.title}</h3>
-              <p className="mt-2 leading-relaxed text-ink-secondary">{p.body}</p>
-            </div>
-          ))}
-        </div>
+    <Band tone="stone">
+      <SectionHeading
+        eyebrow="The problem"
+        title="The risk is in the terms nobody has read."
+        lede="Most teams already store their contracts somewhere sensible. What they can’t easily see is what those contracts say."
+      />
+      <div className="mt-20 grid gap-12 sm:grid-cols-3 sm:gap-8">
+        {PAINS.map((p, i) => (
+          <Numbered key={p.title} n={i + 1} title={p.title}>
+            {p.body}
+          </Numbered>
+        ))}
       </div>
-    </section>
+    </Band>
   )
 }
