@@ -3,8 +3,8 @@ import { Band, SectionHeading } from '@/components/Section'
 import { CONTACT_EMAIL } from '@/config'
 
 // Every answer must be literally true of the deployed system, same rule as
-// Security.tsx. Where AI processing happens is a deliberate, honest answer —
-// see CLAUDE.md's Gemini/Vertex section before changing it.
+// Security.tsx. No hosting locations or provider names on the public site;
+// those details go to prospects in a security review.
 const FAQS = [
   {
     q: 'Does MangoDocs move or change our files?',
@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     q: 'Where is our data stored and processed?',
-    a: 'The application and its database run in Google Cloud’s London region. Contract text is read by Google’s Gemini models under Google’s enterprise data-processing terms; that processing isn’t guaranteed to stay in the UK or EU.',
+    a: 'On enterprise cloud infrastructure, under data-processing agreements with each of our providers. We share the full details, including where each part of the service runs, as part of your security review.',
   },
   {
     q: 'Can it read scanned PDFs?',

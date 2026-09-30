@@ -7,7 +7,7 @@ import { CONTACT_EMAIL } from '@/config'
 // contract data is governed by their own agreement. Keep every statement
 // literally true: if analytics, cookies or a new processor are ever added,
 // this page changes in the same commit.
-const UPDATED = '27 September 2026'
+const UPDATED = '30 September 2026'
 
 function H({ children }: { children: ReactNode }) {
   return <h2 className="display-3 mt-14 text-ink">{children}</h2>
@@ -66,8 +66,8 @@ export function Privacy() {
 
         <H>Where it’s kept, and who else handles it</H>
         <P>
-          Form submissions are stored in our database in Google Cloud’s London region. The website itself is delivered
-          by Google’s Firebase Hosting. Google acts as our processor for both, under its data-processing terms.
+          Form submissions are stored in our own database. The website and that database run on our cloud infrastructure
+          provider, which acts as our processor under a data-processing agreement. Ask us and we’ll tell you who it is.
         </P>
 
         <H>How long we keep it</H>

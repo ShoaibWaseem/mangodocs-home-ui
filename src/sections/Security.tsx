@@ -1,16 +1,16 @@
 import { Band, SectionHeading } from '@/components/Section'
 
-// Keep every claim here literally true of the deployed system — see
-// CLAUDE.md's Gemini/Vertex section before adding anything about where AI
-// processing happens (it is not currently EU-resident).
+// Keep every claim here literally true of the deployed system. Deliberately
+// no hosting locations or provider names on the public site: those are
+// shared with prospects in a security review, not advertised.
 const ITEMS = [
   {
     title: 'Your files stay untouched',
     body: 'MangoDocs reads from Google Drive and SharePoint. It never moves, edits or deletes your existing files.',
   },
   {
-    title: 'Hosted in London',
-    body: 'The application and its database run in Google Cloud’s London region.',
+    title: 'Encrypted throughout',
+    body: 'Contract data is encrypted in transit and at rest.',
   },
   {
     title: 'Two-factor sign-in',

@@ -11,7 +11,7 @@ export function Hero() {
     >
       <div className="container grid max-w-6xl items-center gap-12 pb-20 pt-32 sm:pb-28 sm:pt-40 lg:grid-cols-2 lg:gap-16">
         <div className="lg:order-2">
-          <Meta items={['Contract intelligence', 'Hosted in London']} className="text-white/55" />
+          <Meta items={['Contract intelligence', 'For legal & ops teams']} className="text-white/55" />
           <h1 className="display-1 mt-8">
             Contract intelligence that <span className="text-mango-400">never</span> guesses.
           </h1>

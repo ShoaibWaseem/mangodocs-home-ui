@@ -28,8 +28,10 @@ export function Footer() {
 
         <div className="mt-16 grid gap-8 border-t border-hairline pt-10 sm:grid-cols-2">
           <div>
-            <p className="caps text-ink-muted">Hosting</p>
-            <p className="mt-3 text-sm text-ink-secondary">Google Cloud, London region</p>
+            <p className="caps text-ink-muted">Legal</p>
+            <a href="/privacy" className="mt-3 inline-block text-sm text-ink-secondary hover:text-ink">
+              Privacy notice
+            </a>
           </div>
           <div className="sm:text-right">
             <p className="caps text-ink-muted">Contact</p>
