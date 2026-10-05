@@ -3,11 +3,12 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/sections/Footer'
 import { CONTACT_EMAIL } from '@/config'
 
-// Covers mangodocs.ai (this site and its interest form) only — customers'
-// contract data is governed by their own agreement. Keep every statement
+// Covers mangodocs.ai (this site and its interest form), plus the "Google user
+// data" section, which applies to the app and is what Google's OAuth review
+// reads. Customers' contract data is otherwise governed by their own agreement. Keep every statement
 // literally true: if analytics, cookies or a new processor are ever added,
 // this page changes in the same commit.
-const UPDATED = '30 September 2026'
+const UPDATED = '5 October 2026'
 
 function H({ children }: { children: ReactNode }) {
   return <h2 className="display-3 mt-14 text-ink">{children}</h2>
@@ -38,7 +39,8 @@ export function Privacy() {
         <P>
           This notice explains what happens to personal information you share with MangoDocs through this website,
           mangodocs.ai. It’s short because we collect very little. If your organisation uses the MangoDocs application,
-          the data in it is covered by your organisation’s agreement with us, not by this notice.
+          the data in it is covered by your organisation’s agreement with us, not by this notice, except for the section
+          on Google user data below, which applies to the application.
         </P>
 
         <H>What we collect</H>
@@ -72,6 +74,46 @@ export function Privacy() {
 
         <H>How long we keep it</H>
         <P>For as long as we need it to follow up on your enquiry. Ask us to delete it at any time and we will.</P>
+
+        <H>Google user data in the MangoDocs application</H>
+        <P>
+          When your organisation connects Google Drive, the application asks Google for two permissions. The first lets
+          it see your Drive, so you can choose folders and so it can read the documents in the folders your organisation
+          connects. The second lets it create files, such as drafts, uploaded documents and templates, and change or
+          delete only the files it created. It can’t edit or delete anything else in your Drive.
+        </P>
+        <P>
+          We use that access only to provide the application’s features to your organisation: finding contracts,
+          extracting their key terms and obligations, searching them and writing the documents you ask it to create. We
+          store the text of those documents and the information extracted from them in our database, encrypted, along
+          with the access Google grants us. To analyse documents we send their content to AI and text-recognition
+          services that act as our processors and don’t use it to train their models.
+        </P>
+        <P>
+          We don’t sell Google user data, use it for advertising, or use it to build models for anyone else. People at
+          MangoDocs don’t read it unless you ask us to (for example, for support), it’s needed for security, or the law
+          requires it.
+        </P>
+        <P>
+          MangoDocs’ use and transfer to any other app of information received from Google APIs will adhere to the{' '}
+          <a
+            href="https://developers.google.com/terms/api-services-user-data-policy"
+            className="text-ink underline decoration-mango-500 underline-offset-4 hover:decoration-ink"
+          >
+            Google API Services User Data Policy
+          </a>
+          , including the Limited Use requirements.
+        </P>
+        <P>
+          You can remove the application’s access at any time from your Google Account’s{' '}
+          <a
+            href="https://myaccount.google.com/permissions"
+            className="text-ink underline decoration-mango-500 underline-offset-4 hover:decoration-ink"
+          >
+            third-party access page
+          </a>
+          . To have the data we hold from your Drive deleted, email <Mail />.
+        </P>
 
         <H>Your rights</H>
         <P>
