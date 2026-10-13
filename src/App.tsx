@@ -14,8 +14,11 @@ import { Footer } from '@/sections/Footer'
 export function App() {
   return (
     <div id="top">
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <Header overDark />
-      <main>
+      <main id="main" tabIndex={-1} className="focus:outline-none">
         <Hero />
         <Problem />
         <Reading />

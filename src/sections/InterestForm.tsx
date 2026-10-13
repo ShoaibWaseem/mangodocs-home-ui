@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { CheckCircle2, Loader2 } from 'lucide-react'
 import { Band, Eyebrow, Meta } from '@/components/Section'
 import { buttonClass } from '@/components/Button'
@@ -8,7 +8,7 @@ type Status = 'idle' | 'submitting' | 'done' | 'error'
 type FieldErrors = Partial<Record<'name' | 'email' | 'company' | 'role' | 'message', string>>
 
 const inputClass =
-  'mt-2 block w-full rounded-none border-0 bg-field px-4 py-3 text-ink ring-1 ring-inset ring-transparent transition-[box-shadow] duration-150 placeholder:text-neutral-400 focus:outline-none focus:ring-mango-600 aria-[invalid=true]:ring-danger-500'
+  'mt-2 block w-full rounded-none border-0 border-b border-neutral-600 bg-field px-4 py-3 text-ink ring-inset ring-mango-700 transition-[box-shadow] duration-150 placeholder:text-neutral-600 focus:outline-none focus:ring-2 aria-[invalid=true]:border-danger-500 aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger-500 aria-[invalid=true]:focus:ring-2'
 
 function Field({
   id,
@@ -42,6 +42,17 @@ function Field({
 export function InterestForm() {
   const [status, setStatus] = useState<Status>('idle')
   const [errors, setErrors] = useState<FieldErrors>({})
+  const formRef = useRef<HTMLFormElement>(null)
+  const doneRef = useRef<HTMLHeadingElement>(null)
+
+  // Keyboard and screen-reader users land where the result is: the first
+  // field the server rejected, or the thank-you message (the form is gone).
+  useEffect(() => {
+    formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus()
+  }, [errors])
+  useEffect(() => {
+    if (status === 'done') doneRef.current?.focus()
+  }, [status])
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -99,12 +110,14 @@ export function InterestForm() {
         <div>
           {status === 'done' ? (
             <div className="flex min-h-[22rem] flex-col justify-center border-t border-hairline animate-in-soft">
-              <CheckCircle2 className="h-8 w-8 text-mango-700" strokeWidth={1.25} />
-              <h3 className="display-3 mt-6 text-ink">Thanks, we’ll be in touch.</h3>
+              <CheckCircle2 aria-hidden="true" className="h-8 w-8 text-mango-700" strokeWidth={1.25} />
+              <h3 ref={doneRef} tabIndex={-1} className="display-3 mt-6 text-ink focus:outline-none">
+                Thanks, we’ll be in touch.
+              </h3>
               <p className="mt-3 max-w-sm text-[15px] text-ink-muted">We’ll reply to your work email shortly.</p>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="grid gap-6">
+            <form ref={formRef} onSubmit={onSubmit} className="grid gap-6">
               <div className="grid gap-6 sm:grid-cols-2">
                 <Field id="name" label="Full name" error={errors.name}>
                   <input
@@ -186,7 +199,7 @@ export function InterestForm() {
                 >
                   {status === 'submitting' ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin" /> Sending
+                      <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin motion-reduce:animate-none" /> Sending
                     </>
                   ) : (
                     <>

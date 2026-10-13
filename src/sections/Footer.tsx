@@ -7,6 +7,7 @@ const LINKS = [
   { href: '/#security', label: 'Security' },
   { href: '/#faq', label: 'FAQ' },
   { href: '/privacy', label: 'Privacy' },
+  { href: '/terms', label: 'Terms' },
   { href: APP_URL, label: 'Sign in' },
 ]
 
@@ -16,10 +17,10 @@ export function Footer() {
       <div className="container max-w-6xl">
         <div className="flex flex-col items-center text-center">
           <Logo />
-          <p className="mt-4 text-[15px] text-ink-muted">Contract intelligence that never guesses.</p>
+          <p className="mt-4 text-[15px] text-ink-muted">Contract intelligence that shows its sources.</p>
           <nav aria-label="Footer" className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3">
             {LINKS.map((l) => (
-              <a key={l.label} href={l.href} className="caps text-ink-muted transition-colors hover:text-ink">
+              <a key={l.label} href={l.href} className="caps py-1.5 text-ink-muted transition-colors hover:text-ink">
                 {l.label}
               </a>
             ))}
@@ -29,9 +30,14 @@ export function Footer() {
         <div className="mt-16 grid gap-8 border-t border-hairline pt-10 sm:grid-cols-2">
           <div>
             <p className="caps text-ink-muted">Legal</p>
-            <a href="/privacy" className="mt-3 inline-block text-sm text-ink-secondary hover:text-ink">
-              Privacy notice
-            </a>
+            <div className="mt-3 flex flex-col gap-2 text-sm">
+              <a href="/privacy" className="text-ink-secondary hover:text-ink">
+                Privacy notice
+              </a>
+              <a href="/terms" className="text-ink-secondary hover:text-ink">
+                Terms
+              </a>
+            </div>
           </div>
           <div className="sm:text-right">
             <p className="caps text-ink-muted">Contact</p>

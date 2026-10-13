@@ -4,7 +4,7 @@ import { SourcesFlow } from '@/components/SourcesFlow'
 const STEPS = [
   {
     title: 'Connect a folder',
-    body: 'Choose the Google Drive or SharePoint folders to connect. Nothing is moved, edited or copied into a new filing system.',
+    body: 'Choose the Google Drive or SharePoint folders to connect. Your files stay where they are: nothing is moved or edited.',
   },
   {
     title: 'It reads each contract',

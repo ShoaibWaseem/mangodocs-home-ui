@@ -8,7 +8,7 @@ import { CONTACT_EMAIL } from '@/config'
 const FAQS = [
   {
     q: 'Does MangoDocs move or change our files?',
-    a: 'No. It reads the folders you choose in Google Drive or SharePoint and never moves, edits or deletes the files in them. The only files it ever writes are new drafts you ask it to create.',
+    a: 'No. It reads the folders you choose and never moves, edits or deletes the files already in them. In Google Drive it can also save new files you ask it to, such as drafts, uploaded documents and templates, and those are the only files it changes. In SharePoint it only reads.',
   },
   {
     q: 'What happens when a contract doesn’t say something?',
@@ -28,7 +28,7 @@ const FAQS = [
   },
   {
     q: 'What happens if we stop using MangoDocs?',
-    a: 'Your contracts never left your own Drive or SharePoint, so there’s nothing to migrate back. Everything MangoDocs extracted can be exported to CSV.',
+    a: 'Your contracts are still stored in your own Drive or SharePoint, so there’s nothing to migrate back. MangoDocs keeps an encrypted copy of each contract’s text and the terms it extracted, which is deleted when you disconnect a source, or 30 days after you close your account. Your contract list can be exported to CSV.',
   },
 ]
 
@@ -56,6 +56,7 @@ export function Faq() {
               <summary className="flex cursor-pointer list-none items-center justify-between gap-8 py-7 text-left font-display text-xl font-light tracking-[-0.01em] text-ink [&::-webkit-details-marker]:hidden">
                 {f.q}
                 <Plus
+                  aria-hidden="true"
                   className="h-5 w-5 shrink-0 text-mango-700 transition-transform duration-200 ease-out group-open:rotate-45"
                   strokeWidth={1.25}
                 />

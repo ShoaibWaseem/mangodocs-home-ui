@@ -33,7 +33,7 @@ export function Honesty() {
         </div>
 
         <div ref={ref} data-visible={inView || undefined} className="self-center">
-          <div className="caps hidden grid-cols-[1fr_1fr_1fr] gap-4 pb-4 text-ink-muted sm:grid">
+          <div aria-hidden="true" className="caps hidden grid-cols-[1fr_1fr_1fr] gap-4 pb-4 text-ink-muted sm:grid">
             <span>Question</span>
             <span>A guessing tool</span>
             <span className="text-mango-800">MangoDocs</span>
@@ -44,9 +44,11 @@ export function Honesty() {
               className="grid gap-2 border-t border-hairline py-6 text-[15px] last:border-b sm:grid-cols-[1fr_1fr_1fr] sm:gap-4"
             >
               <span className="text-ink">{row.question}</span>
-              {/* Phones stack each row, so the column headings become inline labels. */}
+              {/* Phones stack each row, so the column headings become inline labels.
+                  On wider screens the labels stay for screen readers, which
+                  can't see the strikethrough or the column headings. */}
               <span className="text-ink-muted">
-                <span className="caps mr-3 text-[10px] sm:hidden">Guess</span>
+                <span className="caps mr-3 text-[10px] sm:sr-only">A guessing tool says</span>
                 <span style={{ transitionDelay: `${i * ROW_STAGGER_MS}ms` }} className="strike">
                   {row.guess}
                 </span>
@@ -55,7 +57,7 @@ export function Honesty() {
                 style={{ transitionDelay: `${i * ROW_STAGGER_MS + ANSWER_AFTER_MS}ms` }}
                 className="honest-answer font-medium text-ink"
               >
-                <span className="caps mr-3 text-[10px] text-mango-800 sm:hidden">MangoDocs</span>
+                <span className="caps mr-3 text-[10px] text-mango-800 sm:sr-only">MangoDocs says</span>
                 {row.honest}
               </span>
             </div>

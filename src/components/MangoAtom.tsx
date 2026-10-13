@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { useEffect, useRef, useState } from 'react'
+import { Pause, Play } from 'lucide-react'
 
 // Hero brand moment: the mango as an atom's nucleus, with documents of every
 // format orbiting it. Loops forever, slowly (constant motion → linear), and
@@ -54,13 +55,16 @@ const DOC_IN_STAGGER_MS = 70
 
 export function MangoAtom() {
   const ref = useRef<HTMLDivElement>(null)
-  const [paused, setPaused] = useState(false)
+  const [offScreen, setOffScreen] = useState(false)
+  // Motion that runs forever needs a way to stop it (WCAG 2.2.2).
+  const [stopped, setStopped] = useState(false)
+  const paused = offScreen || stopped
 
   // Nobody needs an animation running below the fold.
   useEffect(() => {
     const el = ref.current
     if (!el || !('IntersectionObserver' in window)) return
-    const observer = new IntersectionObserver(([entry]) => setPaused(!entry.isIntersecting))
+    const observer = new IntersectionObserver(([entry]) => setOffScreen(!entry.isIntersecting))
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
@@ -68,54 +72,73 @@ export function MangoAtom() {
   let order = 0
 
   return (
-    <div
-      ref={ref}
-      data-paused={paused || undefined}
-      className="atom relative mx-auto aspect-square w-full max-w-[28rem]"
-      role="img"
-      aria-label="The MangoDocs mango at the centre of an atom, with documents of every format orbiting it"
-    >
-      <div aria-hidden="true" className="absolute inset-[18%] -z-10 rounded-full bg-[rgba(232,140,30,0.18)] blur-3xl" />
-      <div className="atom-scene absolute inset-0" aria-hidden="true">
-        <div className="atom-nucleus">
-          <svg viewBox="-20 0 200 200" className="h-full w-full">
-            <path
-              d="M88 2L156 79C155.7 84.8 157.2 101.3 154 114C150.8 126.7 144.7 143 137 155C129.3 167 117.7 179 108 186C98.3 193 88 196 79 197C70 198 60.7 195.5 54 192C47.3 188.5 43 183.7 39 176C35 168.3 34.2 155.8 30 146C25.8 136.2 18.3 127.7 14 117C9.7 106.3 5 93.5 4 82C3 70.5 4.3 58 8 48C11.7 38 18.3 29 26 22C33.7 15 43.7 9.3 54 6C64.3 2.7 82.3 2.7 88 2Z"
-              fill="#E88C1E"
-            />
-            <path d="M88 2L88 79L156 79Z" fill="#B96409" />
-          </svg>
-        </div>
-
-        {ORBITS.map((o) => (
-          <div
-            key={o.angle}
-            className="atom-orbit"
-            style={{ transform: `rotateZ(${o.angle}deg) rotateX(${ORBIT_TILT}deg)` } as CSSProperties}
-          >
-            <div className="atom-ring" style={{ '--r': `${o.radius}cqi` } as CSSProperties} />
-            {o.docs.map((d) => (
-              <DocCard
-                key={d.format}
-                doc={d}
-                style={
-                  {
-                    '--r': `${o.radius}cqi`,
-                    '--w': `${d.w}cqi`,
-                    '--h': `${d.h}cqi`,
-                    // Undo the ring's tilt, then add the document's own small lean.
-                    '--face': `rotateX(${-ORBIT_TILT}deg) rotateZ(${-o.angle + d.tilt}deg)`,
-                    animationDuration: `${o.seconds}s, 500ms`,
-                    animationDirection: `${o.reverse ? 'reverse' : 'normal'}, normal`,
-                    // Negative delay = start part-way round, so documents are spread out from frame one.
-                    animationDelay: `${-d.phase * o.seconds}s, ${200 + order++ * DOC_IN_STAGGER_MS}ms`,
-                  } as CSSProperties
-                }
+    <div className="relative mx-auto w-full max-w-[28rem]">
+      <div
+        ref={ref}
+        data-paused={paused || undefined}
+        className="atom relative aspect-square w-full"
+        role="img"
+        aria-label="The MangoDocs mango at the centre of an atom, with documents of every format orbiting it"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-[18%] -z-10 rounded-full bg-[rgba(232,140,30,0.18)] blur-3xl"
+        />
+        <div className="atom-scene absolute inset-0" aria-hidden="true">
+          <div className="atom-nucleus">
+            <svg viewBox="-20 0 200 200" className="h-full w-full">
+              <path
+                d="M88 2L156 79C155.7 84.8 157.2 101.3 154 114C150.8 126.7 144.7 143 137 155C129.3 167 117.7 179 108 186C98.3 193 88 196 79 197C70 198 60.7 195.5 54 192C47.3 188.5 43 183.7 39 176C35 168.3 34.2 155.8 30 146C25.8 136.2 18.3 127.7 14 117C9.7 106.3 5 93.5 4 82C3 70.5 4.3 58 8 48C11.7 38 18.3 29 26 22C33.7 15 43.7 9.3 54 6C64.3 2.7 82.3 2.7 88 2Z"
+                fill="#E88C1E"
               />
-            ))}
+              <path d="M88 2L88 79L156 79Z" fill="#B96409" />
+            </svg>
           </div>
-        ))}
+
+          {ORBITS.map((o) => (
+            <div
+              key={o.angle}
+              className="atom-orbit"
+              style={{ transform: `rotateZ(${o.angle}deg) rotateX(${ORBIT_TILT}deg)` } as CSSProperties}
+            >
+              <div className="atom-ring" style={{ '--r': `${o.radius}cqi` } as CSSProperties} />
+              {o.docs.map((d) => (
+                <DocCard
+                  key={d.format}
+                  doc={d}
+                  style={
+                    {
+                      '--r': `${o.radius}cqi`,
+                      '--w': `${d.w}cqi`,
+                      '--h': `${d.h}cqi`,
+                      // Undo the ring's tilt, then add the document's own small lean.
+                      '--face': `rotateX(${-ORBIT_TILT}deg) rotateZ(${-o.angle + d.tilt}deg)`,
+                      animationDuration: `${o.seconds}s, 500ms`,
+                      animationDirection: `${o.reverse ? 'reverse' : 'normal'}, normal`,
+                      // Negative delay = start part-way round, so documents are spread out from frame one.
+                      animationDelay: `${-d.phase * o.seconds}s, ${200 + order++ * DOC_IN_STAGGER_MS}ms`,
+                    } as CSSProperties
+                  }
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
+      {/* Reduced motion already shows a still atom, so the control isn't needed there. */}
+      <button
+        type="button"
+        onClick={() => setStopped((v) => !v)}
+        aria-pressed={stopped}
+        aria-label="Pause animation"
+        className="absolute bottom-0 right-0 inline-flex h-9 w-9 items-center justify-center text-white/55 transition-colors hover:text-white motion-reduce:hidden"
+      >
+        {stopped ? (
+          <Play aria-hidden="true" className="h-4 w-4" strokeWidth={1.5} />
+        ) : (
+          <Pause aria-hidden="true" className="h-4 w-4" strokeWidth={1.5} />
+        )}
+      </button>
     </div>
   )
 }

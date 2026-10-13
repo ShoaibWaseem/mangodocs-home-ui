@@ -77,6 +77,8 @@
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
+    /* The fixed header is 4rem tall: keep anchors and keyboard focus clear of it. */
+    scroll-padding-top: 4rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -111,6 +113,13 @@
   :focus-visible {
     outline: 2px solid var(--mango-700);
     outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* First focusable thing on every page; invisible until tabbed to. */
+  .skip-link {
+    @apply caps fixed left-4 top-3 z-50 -translate-y-24 bg-neutral-900 px-5 py-3 text-neutral-50 focus:translate-y-0;
   }
 }
 

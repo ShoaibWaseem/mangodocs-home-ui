@@ -6,7 +6,7 @@ import { Band, SectionHeading } from '@/components/Section'
 const ITEMS = [
   {
     title: 'Your files stay untouched',
-    body: 'MangoDocs reads from Google Drive and SharePoint. It never moves, edits or deletes your existing files.',
+    body: 'MangoDocs reads from Google Drive and SharePoint. It never moves, edits or deletes your existing files; in Drive, the only files it changes are ones it created for you, such as drafts.',
   },
   {
     title: 'Encrypted throughout',
@@ -29,7 +29,7 @@ export function Security() {
         <SectionHeading
           eyebrow="Security"
           title="How your contracts are protected."
-          lede="Your contracts stay in your own Drive or SharePoint. MangoDocs reads them there."
+          lede="Your contracts are still stored in, and read from, your own Drive or SharePoint. MangoDocs keeps an encrypted copy of their text so it can search and analyse them."
         />
         <ul className="lg:pt-10">
           {ITEMS.map((item) => (

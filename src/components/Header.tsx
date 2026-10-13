@@ -27,6 +27,18 @@ export function Header({ overDark = false }: { overDark?: boolean }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [overDark])
 
+  // Escape closes the mobile menu and puts focus back on its button.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      document.getElementById('menu-button')?.focus()
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open])
+
   const light = !pastHero && !open
 
   return (
@@ -66,13 +78,18 @@ export function Header({ overDark = false }: { overDark?: boolean }) {
 
         <button
           type="button"
+          id="menu-button"
           className="-mr-2 inline-flex h-10 w-10 items-center justify-center md:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X className="h-5 w-5" strokeWidth={1.5} /> : <Menu className="h-5 w-5" strokeWidth={1.5} />}
+          {open ? (
+            <X aria-hidden="true" className="h-5 w-5" strokeWidth={1.5} />
+          ) : (
+            <Menu aria-hidden="true" className="h-5 w-5" strokeWidth={1.5} />
+          )}
         </button>
       </div>
 
@@ -93,7 +110,7 @@ export function Header({ overDark = false }: { overDark?: boolean }) {
         </ul>
         <div className="mt-6 flex flex-col gap-3">
           <ButtonLink href={DEMO_URL} onClick={() => setOpen(false)}>
-            Request a demo →
+            Request a demo <span aria-hidden="true">→</span>
           </ButtonLink>
           <a href={APP_URL} className="caps py-3 text-center text-ink-muted">
             Sign in

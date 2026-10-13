@@ -13,7 +13,7 @@ export function Hero() {
         <div>
           <Meta items={['Contract intelligence', 'For legal & ops teams']} className="text-white/55" />
           <h1 className="display-1 mt-8">
-            Contract intelligence that <span className="text-mango-400">never</span> guesses.
+            Contract intelligence that shows its <span className="text-mango-400">sources</span>.
           </h1>
           <p className="mt-8 max-w-lg text-base leading-relaxed text-white/75 sm:text-lg">
             MangoDocs connects to the folders where your contracts are stored. It reads each contract, tracks renewals

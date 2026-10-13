@@ -30,7 +30,7 @@ export function ContractCard() {
       <div className="overflow-hidden border border-hairline bg-surface">
         <div className="flex items-center gap-3 border-b border-border px-5 py-4">
           <span className="flex h-9 w-9 items-center justify-center bg-mango-50 text-mango-800">
-            <FileText className="h-[18px] w-[18px]" strokeWidth={1.5} />
+            <FileText aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.5} />
           </span>
           <div className="min-w-0">
             <p className="text-sm font-medium text-ink">Kestrel Master Services Agreement</p>
@@ -72,7 +72,7 @@ export function ContractCard() {
 
         <div className="border-t border-border bg-surface-sunken px-5 py-4">
           <div className="flex gap-3">
-            <Quote className="mt-0.5 h-4 w-4 shrink-0 text-mango-700" />
+            <Quote aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-mango-700" />
             <p className="font-serif text-[0.9375rem] italic leading-relaxed text-ink-secondary">
               “This Agreement shall renew automatically for successive periods of twelve (12) months unless either party
               gives not less than ninety (90) days’ written notice…”

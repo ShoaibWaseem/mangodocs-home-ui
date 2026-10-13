@@ -8,3 +8,13 @@ export const DEMO_URL = '/#interest'
 // Build-time (Vite), so changing it means a rebuild + redeploy — and the
 // connect-src in firebase.json's Content-Security-Policy must change with it.
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'https://api.mangodocs.ai'
+
+// The legal entity behind MangoDocs, shown on /privacy and /terms. Bracketed
+// values are placeholders: vite.config.ts refuses a production build while
+// any remain, so the legal pages can't ship half-filled.
+export const COMPANY = {
+  legalName: '[COMPANY LEGAL NAME]',
+  number: '[COMPANY NUMBER]',
+  address: '[REGISTERED OFFICE ADDRESS]',
+  icoNumber: '[ICO REGISTRATION NUMBER]',
+}
