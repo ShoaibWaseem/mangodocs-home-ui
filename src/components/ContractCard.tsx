@@ -4,7 +4,7 @@ import { useInViewOnce } from '@/lib/useInViewOnce'
 // Illustrative product mock for the hero. Deliberately shows a "Not stated"
 // term — the never-guess behaviour is the pitch, so the picture should prove it.
 const TERMS: { label: string; value: string; cite?: string; missing?: boolean }[] = [
-  { label: 'Counterparty', value: 'Kestrel Logistics Ltd', cite: 'p.1' },
+  { label: 'Counterparty', value: 'Example Logistics Ltd', cite: 'p.1' },
   { label: 'Auto-renewal', value: '12 months, unless notice served', cite: '§14.2' },
   { label: 'Notice deadline', value: '3 Jan 2027', cite: '§14.3' },
   { label: 'Liability cap', value: '£2,000,000 aggregate', cite: '§9.1' },
@@ -33,7 +33,7 @@ export function ContractCard() {
             <FileText aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.5} />
           </span>
           <div className="min-w-0">
-            <p className="text-sm font-medium text-ink">Kestrel Master Services Agreement</p>
+            <p className="text-sm font-medium text-ink">Example Logistics Services Agreement</p>
             <p className="truncate text-xs text-ink-muted">Google Drive · Supplier contracts / 2025</p>
           </div>
           <span className="ml-auto caps shrink-0 bg-mango-100 px-2.5 py-1 text-[10px] text-mango-800">
