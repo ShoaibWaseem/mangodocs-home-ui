@@ -3,6 +3,7 @@ import { CheckCircle2, Loader2 } from 'lucide-react'
 import { Band, Eyebrow, Meta } from '@/components/Section'
 import { buttonClass } from '@/components/Button'
 import { API_BASE_URL, CONTACT_EMAIL } from '@/config'
+import { loadRecaptcha, recaptchaToken } from '@/lib/recaptcha'
 
 type Status = 'idle' | 'submitting' | 'done' | 'error'
 type FieldErrors = Partial<Record<'name' | 'email' | 'company' | 'role' | 'message', string>>
@@ -64,6 +65,7 @@ export function InterestForm() {
     // see mangodocs-api's app/api/public_routes.py for why that matters.
     const body = new URLSearchParams()
     new FormData(e.currentTarget).forEach((value, key) => body.append(key, String(value)))
+    body.append('recaptcha_token', await recaptchaToken('interest'))
 
     try {
       const res = await fetch(`${API_BASE_URL}/api/public/interest`, { method: 'POST', body, credentials: 'omit' })
@@ -117,7 +119,13 @@ export function InterestForm() {
               <p className="mt-3 max-w-sm text-[15px] text-ink-muted">We’ll reply to your work email shortly.</p>
             </div>
           ) : (
-            <form ref={formRef} onSubmit={onSubmit} className="grid gap-6">
+            <form
+              ref={formRef}
+              onSubmit={onSubmit}
+              // reCAPTCHA loads only once someone starts using the form (src/lib/recaptcha.ts).
+              onFocus={() => void loadRecaptcha().catch(() => {})}
+              className="grid gap-6"
+            >
               <div className="grid gap-6 sm:grid-cols-2">
                 <Field id="name" label="Full name" error={errors.name}>
                   <input
@@ -212,6 +220,18 @@ export function InterestForm() {
                   <a href="/privacy" className="underline underline-offset-2 hover:text-ink">
                     Privacy notice
                   </a>
+                </p>
+                {/* Google's required attribution, standing in for the floating badge (hidden in globals.css). */}
+                <p className="text-xs leading-relaxed text-ink-muted">
+                  This form is protected by reCAPTCHA, and the Google{' '}
+                  <a href="https://policies.google.com/privacy" className="underline underline-offset-2 hover:text-ink">
+                    Privacy Policy
+                  </a>{' '}
+                  and{' '}
+                  <a href="https://policies.google.com/terms" className="underline underline-offset-2 hover:text-ink">
+                    Terms of Service
+                  </a>{' '}
+                  apply.
                 </p>
               </div>
             </form>

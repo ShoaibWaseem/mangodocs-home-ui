@@ -7,7 +7,7 @@ import { COMPANY } from '@/config'
 // literally true: if analytics, cookies or a new processor are ever added (or
 // the cookieless visit counting in src/lib/countVisit.ts changes),
 // this page changes in the same commit.
-const UPDATED = '9 October 2026'
+const UPDATED = '13 October 2026'
 
 export function Privacy() {
   return (
@@ -46,11 +46,23 @@ export function Privacy() {
         don’t count your visit at all.
       </P>
 
+      <H>Spam protection on the form</H>
+      <P>
+        To keep automated spam out of the “Request a demo” form, it uses Google reCAPTCHA. It only loads once you start
+        filling in the form, not when you open a page. From then on it runs in your browser, may set cookies, and sends
+        Google information about your browser and how you interact with the page, so it can tell people from bots.
+        Google gives us only a score, which we use to accept or refuse the submission and don’t store. Google provides
+        reCAPTCHA as our processor; its <A href="https://policies.google.com/privacy">Privacy Policy</A> and{' '}
+        <A href="https://policies.google.com/terms">Terms of Service</A> apply. If you’d rather not use it, email{' '}
+        <Mail />
+        instead.
+      </P>
+
       <H>What we don’t do</H>
       <P>
-        This site sets no cookies, stores nothing in your browser, and runs no third-party analytics, advertising or
-        tracking scripts. Its fonts are served from our own site, so visiting it doesn’t send your details to a font
-        provider either.
+        Apart from reCAPTCHA on the form, this site sets no cookies, stores nothing in your browser, and runs no
+        third-party analytics, advertising or tracking scripts. Its fonts are served from our own site, so visiting it
+        doesn’t send your details to a font provider either.
       </P>
 
       <H>Why we use it</H>

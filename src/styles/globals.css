@@ -557,3 +557,9 @@
     }
   }
 }
+
+/* reCAPTCHA's floating badge: hidden, since the interest form carries Google's
+   required attribution text instead (src/sections/InterestForm.tsx). */
+.grecaptcha-badge {
+  visibility: hidden;
+}
