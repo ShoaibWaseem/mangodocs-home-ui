@@ -17,8 +17,10 @@ export const RECAPTCHA_SITE_KEY = '6LfBzewtAAAAAK5kHAfRe5JzDk98Q6GcoTeBi7VP'
 // values are placeholders: vite.config.ts refuses a production build while
 // any remain, so the legal pages can't ship half-filled.
 export const COMPANY = {
-  legalName: '[COMPANY LEGAL NAME]',
-  number: '[COMPANY NUMBER]',
-  address: '[REGISTERED OFFICE ADDRESS]',
-  icoNumber: '[ICO REGISTRATION NUMBER]',
+  legalName: 'Two90 Ltd',
+  number: '16701408',
+  address: 'Palanga, Pine Avenue, Camberley, England, GU15 2LX',
+  // Empty until the ICO data protection fee is registered; /privacy leaves the
+  // registration sentence out while it's empty.
+  icoNumber: '',
 }

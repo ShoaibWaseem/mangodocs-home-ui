@@ -7,7 +7,7 @@ import { COMPANY } from '@/config'
 // literally true: if analytics, cookies or a new processor are ever added (or
 // the cookieless visit counting in src/lib/countVisit.ts changes),
 // this page changes in the same commit.
-const UPDATED = '13 October 2026'
+const UPDATED = '19 October 2026'
 
 export function Privacy() {
   return (
@@ -21,8 +21,10 @@ export function Privacy() {
 
       <H>Who we are</H>
       <P>
-        MangoDocs is provided by <CompanyIdentity />. We are the controller of the information described here, and are
-        registered with the Information Commissioner’s Office (registration number {COMPANY.icoNumber}).
+        MangoDocs is provided by <CompanyIdentity />. We are the controller of the information described here
+        {COMPANY.icoNumber
+          ? `, and are registered with the Information Commissioner’s Office (registration number ${COMPANY.icoNumber}).`
+          : '.'}
       </P>
 
       <H>What we collect</H>
@@ -54,8 +56,7 @@ export function Privacy() {
         Google gives us only a score, which we use to accept or refuse the submission and don’t store. Google provides
         reCAPTCHA as our processor; its <A href="https://policies.google.com/privacy">Privacy Policy</A> and{' '}
         <A href="https://policies.google.com/terms">Terms of Service</A> apply. If you’d rather not use it, email{' '}
-        <Mail />
-        instead.
+        <Mail /> instead.
       </P>
 
       <H>What we don’t do</H>

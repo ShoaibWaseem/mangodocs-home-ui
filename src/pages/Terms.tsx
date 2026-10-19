@@ -4,7 +4,7 @@ import { A, CompanyIdentity, H, LegalPage, Mail, P } from '@/components/Legal'
 // businesses, which is what lets the no-refunds clause stand: there are no
 // consumer cancellation rights to preserve. A signed order form or agreement
 // overrides this page.
-const UPDATED = '9 October 2026'
+const UPDATED = '19 October 2026'
 
 export function Terms() {
   return (
