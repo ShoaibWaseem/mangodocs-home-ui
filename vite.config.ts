@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs'
 // src/config.ts's COMPANY block starts as bracketed placeholders. Never let
 // those reach the live legal pages (ALLOW_PLACEHOLDERS=1 for a local check).
 function assertNoLegalPlaceholders() {
-  const config = readFileSync(path.resolve(__dirname, 'src/config.ts'), 'utf8')
+  const config = readFileSync(path.resolve(import.meta.dirname, 'src/config.ts'), 'utf8')
   const company = config.slice(config.indexOf('export const COMPANY'))
   if (/'\[[A-Z ]+\]'/.test(company) && !process.env.ALLOW_PLACEHOLDERS) {
     throw new Error('src/config.ts COMPANY still has placeholders: fill them in before building for production.')
@@ -25,15 +25,15 @@ export default defineConfig(({ command }) => {
     build: {
       rollupOptions: {
         input: {
-          main: path.resolve(__dirname, 'index.html'),
-          privacy: path.resolve(__dirname, 'privacy.html'),
-          terms: path.resolve(__dirname, 'terms.html'),
+          main: path.resolve(import.meta.dirname, 'index.html'),
+          privacy: path.resolve(import.meta.dirname, 'privacy.html'),
+          terms: path.resolve(import.meta.dirname, 'terms.html'),
         },
       },
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve(import.meta.dirname, './src'),
       },
     },
   }
