@@ -9,6 +9,14 @@
           "mangodocs-home-prod"
         ]
       }
+    },
+    "mangodocs-production": {
+      "hosting": {
+        "home": [
+          "mangodocs-home-production"
+        ]
+      }
     }
-  }
+  },
+  "etags": {}
 }

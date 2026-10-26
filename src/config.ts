@@ -11,7 +11,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'https://api.ma
 // reCAPTCHA Enterprise site key for the interest form (public by design; it's
 // allowed on mangodocs.ai, www and localhost). Must match mangodocs-api's
 // RECAPTCHA_SITE_KEY. See src/lib/recaptcha.ts.
-export const RECAPTCHA_SITE_KEY = '6LfBzewtAAAAAK5kHAfRe5JzDk98Q6GcoTeBi7VP'
+export const RECAPTCHA_SITE_KEY = '6LerTgEuAAAAALYv8LGe9ex38IoPpHamGshhQU-x'
 
 // The legal entity behind MangoDocs, shown on /privacy and /terms. Bracketed
 // values are placeholders: vite.config.ts refuses a production build while
