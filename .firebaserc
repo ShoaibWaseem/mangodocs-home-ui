@@ -1,15 +1,8 @@
 {
   "projects": {
-    "default": "mangodocs-prod"
+    "default": "mangodocs-production"
   },
   "targets": {
-    "mangodocs-prod": {
-      "hosting": {
-        "home": [
-          "mangodocs-home-prod"
-        ]
-      }
-    },
     "mangodocs-production": {
       "hosting": {
         "home": [
